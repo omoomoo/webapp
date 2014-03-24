@@ -9,21 +9,33 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+	<appender name="dest" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${catalina.home}/logs/webapp/webapp" />
+		<param name="threshold" value="debug" />
+		<param name="immediateFlush" value="true" />
+		<param name="append" value="true" />
+		<param name="datePattern" value="'.'yyyy-MM-dd'.log'" />
+
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="conversionPattern" value="[%d{MMdd HH:mm:ss SSS\} %-5p] [%t] %c{3\} - %m%n" />
+		</layout>
+	</appender>
+
 	<!-- Application Loggers -->
 	<logger name="com.webapp.demo">
-		<level value="info" />
+		<level value="debug" />
+		<appender-ref ref="dest" />
 	</logger>
-	
+
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
-	
+
 	<logger name="org.springframework.beans">
 		<level value="info" />
 	</logger>
-	
+
 	<logger name="org.springframework.context">
 		<level value="info" />
 	</logger>
@@ -37,5 +49,5 @@
 		<priority value="warn" />
 		<appender-ref ref="console" />
 	</root>
-	
+
 </log4j:configuration>
