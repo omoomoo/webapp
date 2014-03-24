@@ -1,0 +1,8 @@
+<%@ page language="java" import="java.util.*"
+	contentType="text/html; charset=UTF-8"%>
+	
+<!--Footer-part-->
+<div class="row-fluid">
+  <div id="footer" class="span12">Copyright © 2014 Allwinner Technology Co., Ltd. </div>
+</div>
+<!--end-Footer-part--> 

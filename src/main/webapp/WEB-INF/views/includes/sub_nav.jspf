@@ -1,0 +1,44 @@
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"%>
+<!--sidebar-menu-->
+<div id="sidebar">
+	<a href="<c:url value="/main2/overview"/>" class="visible-phone"><i class="icon icon-home"></i> 概览</a>
+	<ul>
+		<li class="submenu ${sm_0 }"><a href="<c:url value="/main2/overview"/>"><i class="icon icon-home"></i> <span>概览</span></a></li>
+
+		<li class="submenu ${sm_1 }"><a href="#"><i class="icon icon-trophy"></i> <span>销量统计</span> <span class="label label-important">3</span></a>
+			<ul id="sales-submenu">
+				<li><a href="">品牌</a></li>
+				<li><a href="<c:url value="/main2/sales/page"/>">芯片</a></li>
+				<li><a href="<c:url value="/main2/sales/resolution"/>">分辨率</a></li>
+			</ul></li>
+
+		<li class="submenu ${sm_2 }"><a href="#"><i class="icon icon-signal"></i> <span>趋势统计</span> <span class="label label-important">8</span></a>
+			<ul id="tendency-submenu">
+				<li><a href="<c:url value="/main2/tendency/country"/>">地理位置</a></li>
+				<li><a href="<c:url value="/main2/tendency/product"/>">产品</a></li>
+				<li><a href="<c:url value="/main2/tendency/brand"/>">品牌</a></li>
+				<li><a href="<c:url value="/main2/tendency/cpu"/>">芯片</a></li>
+				<li><a href="<c:url value="/main2/tendency/resolution"/>">分辨率</a></li>
+				<li><a href="<c:url value="/main2/tendency/android"/>">安卓版本</a></li>
+				<li><a href="<c:url value="/main2/tendency/memory"/>"">内存</a></li>
+				<li><a href="<c:url value="/main2/tendency/nand"/>"">闪存</a></li>
+			</ul></li>
+
+		<li class="submenu ${sm_3 }"><a href="#"><i class="icon icon-bar-chart"></i> <span>定期统计</span> <span class="label label-important">4</span></a>
+			<ul id="aggregate-submenu">
+				<li><a href="<c:url value="/main2/regular/location"/>">地理位置</a></li>
+				<li><a href="<c:url value="/main2/regular/product"/>">产品</a></li>
+				<li><a href="">品牌</a></li>
+				<li><a href="<c:url value="/main2/regular/cpu"/>">芯片</a></li>
+			</ul></li>
+
+		<li class="submenu ${sm_4 }"><a href="#"><i class="icon icon-th-list"></i> <span>其他统计</span><span class="label label-important">4</span></a>
+			<ul id="others-submenu">
+				<li><a href="<c:url value="/main2/others/visitbyhour"/>">分时访问统计</a></li>
+				<li><a href="<c:url value="/main2/others/swinfo"/>">软件使用及安装</a></li>
+				<li><a href="<c:url value="/main2/others/deviceusage"/>">设备使用时长</a></li>
+			</ul></li>
+
+	</ul>
+</div>
+<!--sidebar-menu-->

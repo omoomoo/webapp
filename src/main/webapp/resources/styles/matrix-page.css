@@ -1,0 +1,51 @@
+.chart-page {
+	line-height: 16px;
+	text-align: right;
+	padding-top: 10px;
+	padding-right: 10px;
+	font-weight: normal;
+}
+
+.chart-page a{	
+	font-size: 12px;
+    padding: 4px 10px !important;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    display: inline-block;
+    line-height: 16px;
+    background: #f5f5f5;
+    text-shadow: 0 1px 0 #ffffff;
+    text-decoration: none;
+    margin-left: -3px;
+    margin-right: 0;
+}
+
+.chart-page a:hover{
+	background: #e8e8e8;
+	color: #222222;
+	text-shadow: 0 1px 0 #ffffff;
+	cursor: pointer;
+}
+
+.chart-page .first{
+	border-radius: 4px 0 0 4px;
+}
+
+.chart-page .last{
+	border-radius: 0 4px 4px 0;
+}
+
+.chart-page .ui-state-disabled{
+	color: #AAAAAA !important;
+}
+
+.chart-page .ui-state-disabled:hover{
+	background: #f5f5f5;
+	cursor: default !important;
+}
+
+.chart-page span .ui-state-disabled{
+	background: #41BEDD !important;
+    color: #ffffff !important;
+}

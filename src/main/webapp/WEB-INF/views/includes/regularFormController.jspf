@@ -1,0 +1,32 @@
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"%>
+<div class="type-selector statisticsType" style="margin-left: 0;">
+	<div class="type-button active" data-value="tv">访问量</div>
+	<div class="type-button" data-value="adv">活跃设备</div>
+	<div class="type-button" data-value="aiv">活跃IP</div>
+</div>
+<input type="hidden" id="statisticsType" name="statisticsType" value="tv" />
+
+<div class="type-selector timeType">
+	<div class="type-button active" data-value="daily">日统计</div>
+	<div class="type-button" data-value="weekly">周统计</div>
+</div>
+<input type="hidden" id="timeType" name="timeType" value="daily" />
+
+<div id="date-selector">
+	<div class="calendar" id="date-picker-button"></div>
+	<div id="date-picker" style="margin-left: -88px;">
+		<div class="calendar-tip"></div>
+		<div class="calendar-container">
+			<input type="hidden" id="endDate" name="date" value="${endDate}" />
+			<div id="date-to" style="float: left; margin-left: 3px; border: 1px solid #666; border-radius: 3px;"></div>
+		</div>
+		<div style="overflow: auto; margin-top: 6px; padding: 3px;">
+			<div id="date-submit" style="float: right;" class="cly-button-dark">确定</div>
+		</div>
+	</div>
+
+	<div class="date-button" id="1week">一周以前</div>
+	<div class="date-button" id="1month">1个月前</div>
+	<div class="date-button" id="2months">2个月前</div>
+	<div class="date-button" id="3months">3个月前</div>
+</div>
