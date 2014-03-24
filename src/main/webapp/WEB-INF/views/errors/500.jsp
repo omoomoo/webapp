@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SDK Analytics2.0</title>
-<%@ include file="/WEB-INF/views/includes/headScriptsAndLinks.jspf"%>
+<%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/includes/header.jspf"%>
@@ -48,6 +48,6 @@
 
 	<!-- 脚本  -->
 	<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
-	<%@ include file="/WEB-INF/views/includes/footScriptsAndLinks.jspf"%>
+	<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 </body>
 </html>

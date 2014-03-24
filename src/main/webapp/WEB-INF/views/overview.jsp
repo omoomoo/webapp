@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SDK Analytics2.0</title>
-<%@ include file="/WEB-INF/views/includes/headScriptsAndLinks.jspf"%>
+<%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>
 <link rel="stylesheet" href="<c:url value="/resources2/styles/sdk.print.css"/>" media="print" />
 </head>
 <body>
@@ -94,7 +94,7 @@
 
 	<!-- 脚本  -->
 	<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
-	<%@ include file="/WEB-INF/views/includes/footScriptsAndLinks.jspf"%>
+	<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 	<script type="text/javascript" src="<c:url value="/resources2/scripts/sdk.overview.js"/>"></script>
 	<script type="text/javascript">
 		var url = '<c:url value="/main2/overview/generalStatistics.json"/>';
