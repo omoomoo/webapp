@@ -3,7 +3,11 @@
 								http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 								http://www.springframework.org/schema/security
 								http://www.springframework.org/schema/security/spring-security.xsd">
-
+	<debug/>
+	
+	<!-- 方法保护   -->
+	<global-method-security secured-annotations="enabled" jsr250-annotations="disabled" pre-post-annotations="enabled"/>
+	
 	<!-- 不需要Security保护的资源 -->
 	<http pattern="/resources/**" security="none" />
 	
@@ -22,7 +26,7 @@
 		<!-- 登出管理  -->
 		<logout logout-url="/logout" 
 				logout-success-url="/login.html?logout" 
-				delete-cookies="true" 
+				delete-cookies="JSESSIONID" 
 				invalidate-session="true" />
 		<!-- Header管理 -->
 		<headers>
@@ -33,19 +37,19 @@
 		</headers>
 		<!-- Session策略  -->
 		<session-management session-fixation-protection="migrateSession">
-			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/login.html"/>
+			<concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/login.html"/>
 		</session-management>
-		<!-- Token策略 -->
+		<!-- Token策略  -->
 		<csrf />
 	</http>
 
 	<!-- 认证管理  -->
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
-				<user name="bob" password="bobspassword" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
+		<authentication-provider user-service-ref='myUserDetailsService'/>
 	</authentication-manager>
+	
+	<beans:bean id="myUserDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+		<beans:property name="dataSource" ref="dataSource"/>
+	</beans:bean>
+	
 </beans:beans>

@@ -75,6 +75,12 @@
 			<artifactId>derbyclient</artifactId>
 			<version>10.4.2.0</version>
 		</dependency>
+		<!-- 数据库连接池，性能要优于C3P0 -->
+		<dependency>
+			<groupId>com.jolbox</groupId>
+			<artifactId>bonecp</artifactId>
+			<version>0.7.1.RELEASE</version>
+		</dependency>
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>

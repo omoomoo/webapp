@@ -28,7 +28,10 @@
 	</logger>
 
 	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework">
+	<logger name="org.springframework.web">
+		<level value="debug" />
+	</logger>
+	<logger name="org.springframework.jdbc">
 		<level value="debug" />
 	</logger>
 
