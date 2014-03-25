@@ -23,7 +23,7 @@
 	<context:property-placeholder location="WEB-INF/classes/application.properties" />
 
 	<!-- MySQL数据源 -->
-	<beans:bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+	<beans:bean id="dataSourceSpied" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
 		<beans:property name="driverClass" value="${jdbc.driver}" />
 		<beans:property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
 		<beans:property name="username" value="${jdbc.username}" />
@@ -35,11 +35,13 @@
 		<beans:property name="statementsCacheSize" value="100" />
 		<beans:property name="releaseHelperThreads" value="3" />
 	</beans:bean>
+
+	<beans:bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<beans:constructor-arg ref="dataSourceSpied" />
+	</beans:bean>
 	<!-- JDBC Template -->
 	<beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<beans:property name="dataSource">
-			<beans:ref bean="dataSource" />
-		</beans:property>
+		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 
 	<!-- JDBC事务 -->
@@ -57,6 +59,7 @@
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</beans:prop>
 				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
 				<beans:prop key="hibernate.show_sql">true</beans:prop>
+				<beans:prop key="hibernate.format_sql">true</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>

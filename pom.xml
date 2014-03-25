@@ -81,11 +81,11 @@
 			<artifactId>bonecp</artifactId>
 			<version>0.7.1.RELEASE</version>
 		</dependency>
-		<!-- Log4jdbc -->
+		<!-- log4jdbc-remix -->
 		<dependency>
-  			<groupId>com.googlecode.log4jdbc</groupId>
-  			<artifactId>log4jdbc</artifactId>
-  			<version>1.2</version>
+			<groupId>org.lazyluke</groupId>
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.7</version>
 		</dependency>
 		<!-- Hibernate -->
 		<dependency>

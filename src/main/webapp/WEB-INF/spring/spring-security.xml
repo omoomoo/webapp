@@ -3,7 +3,6 @@
 								http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 								http://www.springframework.org/schema/security
 								http://www.springframework.org/schema/security/spring-security.xsd">
-	<debug/>
 	
 	<!-- 方法保护   -->
 	<global-method-security secured-annotations="enabled" jsr250-annotations="disabled" pre-post-annotations="enabled"/>
