@@ -10,7 +10,6 @@
 	<!-- 需要Security保护的资源 -->
 	<http>
 		<intercept-url pattern="/login.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/logout" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<!-- 登陆管理  -->
 		<form-login login-page="/login.html" 

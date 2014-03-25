@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!--Header-part-->
 <div id="header">
 	<h1>
@@ -22,7 +23,11 @@
 				<li class="divider"></li>
 				<li><a href="#"><i class="icon-arrow-up"></i>切换至SDK Analytics1.0</a></li>
 			</ul></li>
-		<li class=""><a title="" href="<c:url value="/logout"/>"><i class="icon icon-share-alt"></i><span class="text">登出</span></a></li>
+		<li class="">
+			<a title="" href="javascript:$('#logout-Form').submit()"><i class="icon icon-share-alt"></i><span class="text">登出</span></a>
+			<c:url value="/logout" var="logout"/>
+			<form:form action="${logout}" method="POST" id="logout-Form" />
+		</li>
 	</ul>
 </div>
 <!--close-top-Header-menu-->
