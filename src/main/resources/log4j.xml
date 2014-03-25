@@ -22,7 +22,7 @@
 	</appender>
 
 	<!-- Application Loggers -->
-	<logger name="com.webapp.demo">
+	<logger name="com.demo.webapp">
 		<level value="debug" />
 		<appender-ref ref="dest" />
 	</logger>

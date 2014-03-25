@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="<c:url value="/resources2/styles/bootstrap.min.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/styles/bootstrap-responsive.min.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/styles/matrix-style.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/styles/matrix-media.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/font-awesome/css/font-awesome.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/styles/jquery.gritter.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/styles/select2.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/styles/matrix-page.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/styles/jquery-ui-1.10.4.custom.min.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources2/styles/sdk.form.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/bootstrap.min.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/bootstrap-responsive.min.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/matrix-style.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/matrix-media.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/font-awesome/css/font-awesome.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/jquery.gritter.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/select2.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/matrix-page.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/jquery-ui-1.10.4.custom.min.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/styles/sdk.form.css"/>" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800"/>

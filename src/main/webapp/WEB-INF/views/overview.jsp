@@ -95,38 +95,9 @@
 	<!-- 脚本  -->
 	<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
 	<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
-	<script type="text/javascript" src="<c:url value="/resources2/scripts/sdk.overview.js"/>"></script>
 	<script type="text/javascript">
-		var url = '<c:url value="/main2/overview/generalStatistics.json"/>';
+		var url = '<c:url value="/main/overview/generalStatistics.json"/>';
 		$.get(url, {}, function(data) {
-			// 昨天 
-			$('.device-count').text(data.device_count);
-			$('.yesterday-statistics td:eq(1)').text(data.ystd_adv);
-			$('.yesterday-statistics td:eq(2)').text(
-					Math.floor((data.ystd_adv / data.device_count * 10000)) / 100 + '%');
-			$('.yesterday-statistics td:eq(3)').text(data.ystd_new);
-			$('.yesterday-statistics td:eq(4)').text(
-					Math.floor((data.yesd_new / data.device_count * 10000)) / 100 + '%');
-			// 上周
-			$('.last-week-statistics td:eq(1)').text(data.last_week_adv);
-			$('.last-week-statistics td:eq(2)').text(
-					Math.floor((data.last_week_adv / data.device_count * 10000)) / 100 + '%');
-			$('.last-week-statistics td:eq(3)').text(data.last_week_new);
-			$('.last-week-statistics td:eq(4)').text(
-					Math.floor((data.last_week_new / data.device_count * 10000)) / 100 + '%');
-			// 上月
-			$('.last-month-statistics td:eq(1)').text(data.last_month_adv);
-			$('.last-month-statistics td:eq(2)').text(
-					Math.floor((data.month_adv / data.device_count * 10000)) / 100 + '%');
-			$('.last-month-statistics td:eq(3)').text(data.last_month_new);
-			$('.last-month-statistics td:eq(4)').text(
-					Math.floor((data.last_month_new / data.device_count * 10000)) / 100 + '%');
-		});
-
-		var url = '<c:url value="/main2/overview/dailyTendency.json?startDate=${startDate}&endDate=${endDate}"/>';
-		$.get(url, {}, function(data) {
-			console.log(data);
-			drawTendencyLineChart('.visit-tendency-line-chart', data);
 		});
 	</script>
 </body>

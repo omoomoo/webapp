@@ -1,36 +1,36 @@
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery-ui-1.10.4.custom.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.select2.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.dataTables.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.uniform.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/bootstrap.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/bootstrap.toggle.buttons.js"/>"></script>
-<!--<script type="text/javascript" src="<c:url value="/resources2/scripts/bootstrap-colorpicker.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/bootstrap-datepicker.js"/>"></script> -->
-<script type="text/javascript" src="<c:url value="/resources2/scripts/masked.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/matrix.js"/>"></script>
-<!--<script type="text/javascript" src="<c:url value="/resources2/scripts/matrix.form_common.js"/>"></script> -->
-<script type="text/javascript" src="<c:url value="/resources2/scripts/matrix.tables.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/select2.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery-ui-1.10.4.custom.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.select2.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.dataTables.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.uniform.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/bootstrap.toggle.buttons.js"/>"></script>
+<!--<script type="text/javascript" src="<c:url value="/resources/scripts/bootstrap-colorpicker.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/bootstrap-datepicker.js"/>"></script> -->
+<script type="text/javascript" src="<c:url value="/resources/scripts/masked.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.js"/>"></script>
+<!--<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.form_common.js"/>"></script> -->
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.tables.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/select2.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/highcharts.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/highcharts-exporting.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/sdk.page.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/sdk.commons.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/sdk.form.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/highcharts-exporting.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/sdk.page.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/sdk.commons.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/sdk.form.js"/>"></script>
 
 
 <!-- 
-<script type="text/javascript" src="<c:url value="/resources2/scripts/excanvas.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/fullcalendar.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.ui.custom.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.flot.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.flot.resize.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.peity.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.wizard.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/jquery.validate.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/matrix.dashboard.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/matrix.interface.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/matrix.chat.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/matrix.form_validation.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources2/scripts/matrix.popover.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/excanvas.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/fullcalendar.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.ui.custom.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.flot.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.flot.resize.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.peity.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.wizard.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.validate.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.dashboard.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.interface.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.chat.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.form_validation.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.popover.js"/>"></script>
  -->
