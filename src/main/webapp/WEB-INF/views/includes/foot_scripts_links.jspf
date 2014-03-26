@@ -20,9 +20,9 @@
 
 
 <!-- 
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.form_common.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.form_validation.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/excanvas.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/fullcalendar.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.ui.custom.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/jquery.flot.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/jquery.flot.resize.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/jquery.peity.min.js"/>"></script>
@@ -31,6 +31,5 @@
 <script type="text/javascript" src="<c:url value="/resources/scripts/matrix.dashboard.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/matrix.interface.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/matrix.chat.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.form_validation.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/matrix.popover.js"/>"></script>
  -->

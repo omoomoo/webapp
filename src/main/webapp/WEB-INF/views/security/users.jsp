@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SDK Analytics2.0</title>
 <%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>
-<link rel="stylesheet" href="<c:url value="/resources2/styles/sdk.print.css"/>" media="print" />
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/includes/header.jspf"%>
@@ -17,7 +16,7 @@
 		<!-- 书签导航 -->
 		<div id="content-header">
 			<div id="breadcrumb">
-				<a href="#" title="概况统计" class="tip-bottom"><i class="icon-home"></i> 概览</a>
+				<a href="#" title="用户列表" class="tip-bottom"><i class="icon-home"></i>用户列表</a>
 			</div>
 		</div>
 
@@ -28,43 +27,34 @@
 					<div class="widget-box">
 						<div class="widget-title">
 							<span class="icon"><i class="icon-th"></i></span>
-							<h5>
-								总设备数 ：<span style="color: red; font-weight: 700; font-size: 200%;" class="device-count"></span>（台）
-							</h5>
+							<h5>用户列表</h5>
 						</div>
 						<div class="widget-content nopadding">
-							<table class="table table-bordered table-striped">
+							<table class="table table-bordered users-table">
 								<thead>
 									<tr>
-										<th></th>
-										<th>活跃设备</th>
-										<th>活跃率</th>
-										<th>新增设备</th>
-										<th>增长率</th>
+										<th>ID</th>
+										<th>用户名</th>
+										<th>邮箱</th>
+										<th>密码</th>
+										<th>状态</th>
+										<th>修改信息</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr class="odd gradeX yesterday-statistics">
-										<td class="center">昨天</td>
-										<td class="center"></td>
-										<td class="center"></td>
-										<td class="center"></td>
-										<td class="center"></td>
-									</tr>
-									<tr class="even gradeC last-week-statistics">
-										<td class="center">上周</td>
-										<td class="center"></td>
-										<td class="center"></td>
-										<td class="center"></td>
-										<td class="center"></td>
-									</tr>
-									<tr class="odd gradeA last-month-statistics">
-										<td class="center">上月</td>
-										<td class="center"></td>
-										<td class="center"></td>
-										<td class="center"></td>
-										<td class="center"></td>
-									</tr>
+									<c:forEach items="${users }" var="user">
+										<tr>
+											<td><c:out value="${user.id }" /></td>
+											<td><c:out value="${user.username }" /></td>
+											<td><c:out value="${user.email }" /></td>
+											<td><c:out value="${fn:substring(user.password, 0, 4)}" />******</td>
+											<td><c:choose>
+													<c:when test="${user.enabled}">启用</c:when>
+													<c:otherwise>禁用</c:otherwise>
+												</c:choose></td>
+											<td><span>修改信息</span></td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -73,21 +63,88 @@
 			</div>
 		</div>
 
-		<!-- 访问趋势  -->
+		<!-- 用户信息   -->
 		<div class="container-fluid">
+			<hr />
 			<div class="row-fluid">
-				<div class="span12">
+				<div class="span6">
 					<div class="widget-box">
 						<div class="widget-title">
 							<span class="icon"><i class="icon-th"></i></span>
-							<h5>访问趋势</h5>
+							<h5>用户管理</h5>
 						</div>
-						<div class="widget-content" style="min-height: 300px;">
-							<div class="visit-tendency-line-chart"></div>
+						<div class="widget-content no-padding">
+							<form action="#" method="get" class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label"> 用户名 :</label>
+									<div class="controls">
+										<input type="text" class="span11" placeholder="用户名" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">密码 :</label>
+									<div class="controls">
+										<input type="text" class="span11" placeholder="密码 " />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">邮箱 :</label>
+									<div class="controls">
+										<input type="password" class="span11" placeholder="邮箱" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">状态 :</label>
+									<div class="controls">
+                						<label><input type="checkbox" name="radios" />启用</label>
+              						</div>
+								</div>
+								<div class="form-actions">
+									<button type="submit" class="btn btn-success">更新</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="span6">
+					<div class="widget-box">
+						<div class="widget-title">
+							<span class="icon"><i class="icon-th"></i></span>
+							<h5>权限组</h5>
+						</div>
+						<div class="widget-content no-padding">
+							<form action="#" method="get" class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label">状态 :</label>
+									<div class="controls">
+                						<label><input type="checkbox" name="radios" />启用</label>
+              						</div>
+								</div><div class="control-group">
+									<label class="control-label">状态 :</label>
+									<div class="controls">
+                						<label><input type="checkbox" name="radios" />启用</label>
+              						</div>
+								</div><div class="control-group">
+									<label class="control-label">状态 :</label>
+									<div class="controls">
+                						<label><input type="checkbox" name="radios" />启用</label>
+              						</div>
+								</div><div class="control-group">
+									<label class="control-label">状态 :</label>
+									<div class="controls">
+                						<label><input type="checkbox" name="radios" />启用</label>
+              						</div>
+								</div>
+								<div class="form-actions">
+									<button type="submit" class="btn btn-success">更新</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
+
 		</div>
 
 	</div>
@@ -96,9 +153,15 @@
 	<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
 	<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 	<script type="text/javascript">
-		var url = '<c:url value="/main/overview/generalStatistics.json"/>';
-		$.get(url, {}, function(data) {
+		$('.users-table').dataTable({
+			'bJQueryUI' : true,
+			'sPaginationType' : "full_numbers",
+			'sDom' : '<""l>t<"F"fp>',
+			'bSort' : true,
+			'bRetrieve' : true,
+			'aaSorting' : [ [ 2, "desc" ] ],
 		});
+		$('select').select2();
 	</script>
 </body>
 </html>
