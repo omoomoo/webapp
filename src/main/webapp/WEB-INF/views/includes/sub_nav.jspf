@@ -4,13 +4,48 @@
 	<a href="<c:url value="/main2/overview"/>" class="visible-phone"><i class="icon icon-home"></i>首页</a>
 	<ul>
 		<li class="submenu"><a href="<c:url value="/main2/overview"/>"><i class="icon icon-home"></i> <span>首页</span></a></li>
-
 		<li class="submenu"><a href="#"><i class="icon icon-trophy"></i> <span>权限菜单</span> <span class="label label-important">3</span></a>
 			<ul id="sales-submenu">
-				<li><a href="">用户管理</a></li>
-				<li><a href="<c:url value="/main2/sales/page"/>">权限管理</a></li>
-				<li><a href="<c:url value="/main2/sales/resolution"/>">权限组管理</a></li>
-			</ul></li>
+				<li><a href="<c:url value="/security/users"/>">用户管理</a></li>
+				<li><a href="<c:url value="/security/authorities"/>">权限管理</a></li>
+				<li><a href="<c:url value="/security/groups"/>">权限组管理</a></li>
+			</ul>
+		</li>
+		<li class="submenu"><a href="#"><i class="icon icon-trophy"></i> <span>权限菜单</span> <span class="label label-important">3</span></a>
+			<ul id="sales-submenu">
+				<li><a href="<c:url value="/security/users"/>">用户管理</a></li>
+				<li><a href="<c:url value="/security/authorities"/>">权限管理</a></li>
+				<li><a href="<c:url value="/security/groups"/>">权限组管理</a></li>
+			</ul>
+		</li>
+		<li class="submenu"><a href="#"><i class="icon icon-trophy"></i> <span>权限菜单</span> <span class="label label-important">3</span></a>
+			<ul id="sales-submenu">
+				<li><a href="<c:url value="/security/users"/>">用户管理</a></li>
+				<li><a href="<c:url value="/security/authorities"/>">权限管理</a></li>
+				<li><a href="<c:url value="/security/groups"/>">权限组管理</a></li>
+			</ul>
+		</li>
+		<li class="submenu"><a href="#"><i class="icon icon-trophy"></i> <span>权限菜单</span> <span class="label label-important">3</span></a>
+			<ul id="sales-submenu">
+				<li><a href="<c:url value="/security/users"/>">用户管理</a></li>
+				<li><a href="<c:url value="/security/authorities"/>">权限管理</a></li>
+				<li><a href="<c:url value="/security/groups"/>">权限组管理</a></li>
+			</ul>
+		</li>
+		<li class="submenu"><a href="#"><i class="icon icon-trophy"></i> <span>权限菜单</span> <span class="label label-important">3</span></a>
+			<ul id="sales-submenu">
+				<li><a href="<c:url value="/security/users"/>">用户管理</a></li>
+				<li><a href="<c:url value="/security/authorities"/>">权限管理</a></li>
+				<li><a href="<c:url value="/security/groups"/>">权限组管理</a></li>
+			</ul>
+		</li>
+		<li class="submenu"><a href="#"><i class="icon icon-trophy"></i> <span>权限菜单</span> <span class="label label-important">3</span></a>
+			<ul id="sales-submenu">
+				<li><a href="<c:url value="/security/users"/>">用户管理</a></li>
+				<li><a href="<c:url value="/security/authorities"/>">权限管理</a></li>
+				<li><a href="<c:url value="/security/groups"/>">权限组管理</a></li>
+			</ul>
+		</li>
 	</ul>
 </div>
 <!--sidebar-menu-->

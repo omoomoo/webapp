@@ -1,4 +1,4 @@
-package com.demo.webapp.repository;
+package com.demo.webapp.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

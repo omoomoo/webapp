@@ -8,4 +8,3 @@
 <link rel="stylesheet" href="<c:url value="/resources/styles/matrix-style.css"/>" />
 <link rel="stylesheet" href="<c:url value="/resources/styles/matrix-media.css"/>" />
 <link rel="stylesheet" href="<c:url value="/resources/styles/matrix-page.css"/>" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800"/>

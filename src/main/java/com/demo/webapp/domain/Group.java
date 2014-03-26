@@ -1,4 +1,4 @@
-package com.demo.webapp.repository;
+package com.demo.webapp.domain;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,11 +1,10 @@
-package com.demo.webapp.repository;
+package com.demo.webapp.domain;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -88,6 +87,12 @@ public class User {
 
 	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled + ", email=" + email + ", groups="
+				+ groups + ", authorities=" + authorities + "]";
 	}
 
 }

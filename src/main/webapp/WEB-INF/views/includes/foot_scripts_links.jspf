@@ -17,8 +17,9 @@
 <script type="text/javascript" src="<c:url value="/resources/scripts/sdk.page.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/sdk.commons.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/sdk.form.js"/>"></script>
-
-
+<!-- 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800" />
+ -->
 <!-- 
 <script type="text/javascript" src="<c:url value="/resources/scripts/matrix.form_common.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/matrix.form_validation.js"/>"></script>

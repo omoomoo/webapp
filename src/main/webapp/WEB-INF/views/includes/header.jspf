@@ -5,7 +5,7 @@
 <!--Header-part-->
 <div id="header">
 	<h1>
-		<a href="#">SDK Analytics</a>
+		<a href="#">XXXX系统</a>
 	</h1>
 </div>
 <!--close-Header-part-->
@@ -18,11 +18,9 @@
 		<li class="dropdown" id="profile-messages"><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i
 				class="icon icon-cog"></i> <span class="text">设置</span><b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="#"><i class="icon-user"></i>系统权限</a></li>
+				<li><a href="<c:url value="/security/personal"/>"><i class="icon-user"></i>修改个人信息</a></li>
 				<li class="divider"></li>
-				<li><a href="#"><i class="icon-check"></i>日志管理</a></li>
-				<li class="divider"></li>
-				<li><a href="#"><i class="icon-arrow-up"></i>切换至SDK Analytics1.0</a></li>
+				<li><a href="<c:url value="/security/personal/password"/>"><i class="icon-arrow-up"></i>修改密码</a></li>
 			</ul></li>
 		<li class="">
 			<a title="" href="javascript:$('#logout-Form').submit()"><i class="icon icon-share-alt"></i><span class="text">登出</span></a>
