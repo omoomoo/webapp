@@ -52,7 +52,7 @@
 													<c:when test="${user.enabled}">启用</c:when>
 													<c:otherwise>禁用</c:otherwise>
 												</c:choose></td>
-											<td><span>修改信息</span></td>
+											<td><span class="query-user-trigger" data-user-url="<c:url value="/security/user/${user.id }" />">修改信息</span></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -61,90 +61,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<!-- 用户信息   -->
-		<div class="container-fluid">
-			<hr />
-			<div class="row-fluid">
-				<div class="span6">
-					<div class="widget-box">
-						<div class="widget-title">
-							<span class="icon"><i class="icon-th"></i></span>
-							<h5>用户管理</h5>
-						</div>
-						<div class="widget-content no-padding">
-							<form action="#" method="get" class="form-horizontal">
-								<div class="control-group">
-									<label class="control-label"> 用户名 :</label>
-									<div class="controls">
-										<input type="text" class="span11" placeholder="用户名" />
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">密码 :</label>
-									<div class="controls">
-										<input type="text" class="span11" placeholder="密码 " />
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">邮箱 :</label>
-									<div class="controls">
-										<input type="password" class="span11" placeholder="邮箱" />
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">状态 :</label>
-									<div class="controls">
-                						<label><input type="checkbox" name="radios" />启用</label>
-              						</div>
-								</div>
-								<div class="form-actions">
-									<button type="submit" class="btn btn-success">更新</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="span6">
-					<div class="widget-box">
-						<div class="widget-title">
-							<span class="icon"><i class="icon-th"></i></span>
-							<h5>权限组</h5>
-						</div>
-						<div class="widget-content no-padding">
-							<form action="#" method="get" class="form-horizontal">
-								<div class="control-group">
-									<label class="control-label">状态 :</label>
-									<div class="controls">
-                						<label><input type="checkbox" name="radios" />启用</label>
-              						</div>
-								</div><div class="control-group">
-									<label class="control-label">状态 :</label>
-									<div class="controls">
-                						<label><input type="checkbox" name="radios" />启用</label>
-              						</div>
-								</div><div class="control-group">
-									<label class="control-label">状态 :</label>
-									<div class="controls">
-                						<label><input type="checkbox" name="radios" />启用</label>
-              						</div>
-								</div><div class="control-group">
-									<label class="control-label">状态 :</label>
-									<div class="controls">
-                						<label><input type="checkbox" name="radios" />启用</label>
-              						</div>
-								</div>
-								<div class="form-actions">
-									<button type="submit" class="btn btn-success">更新</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-
 		</div>
 
 	</div>
@@ -162,6 +78,12 @@
 			'aaSorting' : [ [ 2, "desc" ] ],
 		});
 		$('select').select2();
+		
+		$('.query-user-trigger').click(function(){
+			var url = $(this).attr('data-user-url');
+			console.log(url);
+			window.openWindow(url, '用户信息');
+		});
 	</script>
 </body>
 </html>

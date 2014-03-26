@@ -10,10 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.webapp.domain.User;
+import com.demo.webapp.service.AuthorityService;
+import com.demo.webapp.service.GroupService;
 import com.demo.webapp.service.UserService;
 import com.demo.webapp.service.exception.PasswordIncorrectException;
 
@@ -23,16 +24,23 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private GroupService groupService;
+	@Autowired
+	private AuthorityService authorityService;
 
 	@RequestMapping(value = "/users", method = { RequestMethod.GET })
 	public void getUsers(Model model) {
 		model.addAttribute("users", userService.getUsers());
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/user/{id}", params = { "format" }, method = { RequestMethod.GET })
-	public Object getUser(@PathVariable("id") long id) {
-		return userService.getUser(id);
+	@RequestMapping(value = "/user/{id}", method = { RequestMethod.GET })
+	public Object getUser(@PathVariable("id") long id, Model model) {
+		model.addAttribute("user", userService.getUser(id));
+		model.addAttribute("groups", groupService.getGroups());
+		model.addAttribute("authorities", authorityService.getAuthorities());
+
+		return "/security/user";
 	}
 
 	/**
