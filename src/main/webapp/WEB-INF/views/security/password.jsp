@@ -28,38 +28,42 @@
 					<div class="widget-box">
 						<div class="widget-title">
 							<span class="icon"><i class="icon-th"></i></span>
-							<h5>用户管理</h5>
+							<h5>修改密码</h5>
 						</div>
 						<div class="widget-content no-padding">
-							<form action="#" method="get" class="form-horizontal">
+							<form:form action="" method="PUT" class="form-horizontal">
 								<div class="control-group">
-									<label class="control-label"> 用户名 :</label>
+									<label class="control-label">输入旧密码 :</label>
 									<div class="controls">
-										<input type="text" class="span11" placeholder="用户名" />
+										<input type="password" class="span11" placeholder="输入旧密码 " name="oldPassword" value="<c:out value="${oldPassword }"/>" />
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label">密码 :</label>
+									<label class="control-label">输入新密码 :</label>
 									<div class="controls">
-										<input type="text" class="span11" placeholder="密码 " />
+										<input type="password" class="span11" placeholder="输入新密码" name="newPassword" value="<c:out value="${newPassword }"/>" />
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label">邮箱 :</label>
+									<label class="control-label">确认新密码 :</label>
 									<div class="controls">
-										<input type="password" class="span11" placeholder="邮箱" />
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">状态 :</label>
-									<div class="controls">
-										<label><input type="checkbox" name="radios" />启用</label>
+										<input type="password" class="span11" placeholder="确认新密码" name="newPasswordConfirm" value="<c:out value="${newPassword }"/>" />
 									</div>
 								</div>
 								<div class="form-actions">
-									<button type="submit" class="btn btn-success">更新</button>
+									<c:if test="${param.success != null}">
+										<div class="alert alert-success alert-block">
+											<a class="close" data-dismiss="alert" href="#">×</a> <span>您的密码修改成功，请记住新密码！</span>
+										</div>
+									</c:if>
+									<c:if test="${status eq 'error'}">
+										<div class="alert alert-error alert-block">
+											<a class="close" data-dismiss="alert" href="#">×</a> <span>${message }</span>
+										</div>
+									</c:if>
+									<button type="submit" class="btn btn-success">修改密码</button>
 								</div>
-							</form>
+							</form:form>
 						</div>
 					</div>
 				</div>

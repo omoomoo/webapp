@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.webapp.domain.User;
 import com.demo.webapp.service.UserService;
+import com.demo.webapp.service.exception.PasswordIncorrectException;
 
 @Controller
 @RequestMapping(value = { "/security" })
@@ -63,14 +64,25 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/personal/password", method = RequestMethod.GET)
 	public String getPasswrodPage() {
-		return "/security/person";
+		return "/security/password";
 	}
 
 	/**
 	 * 修改个人密码
 	 */
 	@RequestMapping(value = "/personal/password", method = RequestMethod.PUT)
-	public String changePassword() {
-		return "/security/person";
+	public String changePassword(String oldPassword, String newPassword, Model model, RedirectAttributes redirectAttributes) {
+		try {
+			userService.changePassword(oldPassword, newPassword);
+		} catch (PasswordIncorrectException e) {
+			model.addAttribute("status", "error");
+			model.addAttribute("message", e.getMessage());
+			model.addAttribute("oldPassword", oldPassword);
+			model.addAttribute("newPassword", newPassword);
+
+			return "/security/password";
+		}
+
+		return "redirect:/security/personal/password?success";
 	}
 }

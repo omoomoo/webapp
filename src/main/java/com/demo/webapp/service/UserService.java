@@ -45,18 +45,21 @@ public class UserService {
 		sessionFactory.getCurrentSession().save(user);
 	}
 
-	public void changePassword(String username, String oldPassword, String newPassword) throws PasswordIncorrectException {
+	public void changePassword(String oldPassword, String newPassword) throws PasswordIncorrectException {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = userDetails.getUsername();
+
 		if (!checkPassword(username, oldPassword)) {
-			throw new PasswordIncorrectException("输入的旧密码不正确！");
+			throw new PasswordIncorrectException("您输入的旧密码不正确，请重新输入！");
 		}
 
 		jdbcTemplate.update(UPDATE_PASSWORD_SQL, new Object[] { newPassword, username });
 	}
 
 	public boolean checkPassword(String username, String password) {
-		Map<String, Object> user = jdbcTemplate.queryForMap(CHECK_PASSPORD_SQL, new Object[] { username, password });
+		List<Map<String, Object>> users = jdbcTemplate.queryForList(CHECK_PASSPORD_SQL, new Object[] { username, password });
 
-		return !(user == null);
+		return users.size() == 1;
 	}
 
 	public Object getUser(String username) {

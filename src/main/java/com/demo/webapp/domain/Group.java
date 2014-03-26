@@ -63,4 +63,9 @@ public class Group {
 		this.users = users;
 	}
 
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", name=" + name + ", authorities=" + authorities + ", users=" + users + "]";
+	}
+
 }
