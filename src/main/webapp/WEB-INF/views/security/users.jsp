@@ -28,6 +28,7 @@
 						<div class="widget-title">
 							<span class="icon"><i class="icon-th"></i></span>
 							<h5>用户列表</h5>
+							<span class="btn icon-plus-sign add-user-trigger" style="float:right;margin-top:7px; margin-right:8px;">添加用户</span>
 						</div>
 						<div class="widget-content nopadding">
 							<table class="table table-bordered users-table">
@@ -81,8 +82,11 @@
 		
 		$('.query-user-trigger').click(function(){
 			var url = $(this).attr('data-user-url');
-			console.log(url);
 			window.openWindow(url, '用户信息');
+		});
+		
+		$('.add-user-trigger').click(function(){
+			window.openWindow('<c:url value="/security/user"/>', '用户信息');
 		});
 	</script>
 </body>

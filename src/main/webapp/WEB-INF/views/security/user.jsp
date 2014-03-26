@@ -10,7 +10,13 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<form:form method="PUT" class="form-horizontal">
+		<c:url var="action" value="/security/user" />
+		<c:set var="method" value="POST" />
+		<c:if test="${user ne null }">
+			<c:url var="action" value="" />
+			<c:set var="method" value="PUT" />
+		</c:if>
+		<form:form action="${action }" method="${method }" class="form-horizontal">
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="widget-box">

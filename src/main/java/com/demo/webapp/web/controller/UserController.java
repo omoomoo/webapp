@@ -36,6 +36,20 @@ public class UserController {
 	@Autowired
 	private AuthorityService authorityService;
 
+	@RequestMapping(value = "/user", method = { RequestMethod.GET })
+	public void getUserPage(Model model) {
+		model.addAttribute("groups", groupService.getGroups());
+		model.addAttribute("authorities", authorityService.getAuthorities());
+	}
+
+	@RequestMapping(value = "/user", method = { RequestMethod.POST })
+	public void addUser(User user, HttpServletRequest request, Model model) {
+		logger.debug("add User with : {}", user);
+
+		renderUser(user, request);
+		userService.addUser(user);
+	}
+
 	@RequestMapping(value = "/users", method = { RequestMethod.GET })
 	public void getUsers(Model model) {
 		model.addAttribute("users", userService.getUsers());
