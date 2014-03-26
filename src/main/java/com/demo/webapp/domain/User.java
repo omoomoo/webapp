@@ -1,6 +1,8 @@
 package com.demo.webapp.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -28,10 +30,10 @@ public class User {
 	@Column
 	private String email;
 	@ManyToMany(mappedBy = "users")
-	private Set<Group> groups = new HashSet<Group>();
+	private List<Group> groups = new ArrayList<Group>();
 	@ManyToMany
 	@JoinTable(name = "security_user_authorities", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-	private Set<Authority> authorities = new HashSet<Authority>();
+	private List<Authority> authorities = new ArrayList<Authority>();
 
 	public long getId() {
 		return id;
@@ -73,19 +75,19 @@ public class User {
 		this.email = email;
 	}
 
-	public Set<Group> getGroups() {
+	public List<Group> getGroups() {
 		return groups;
 	}
 
-	public void setGroups(Set<Group> groups) {
+	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
 
-	public Set<Authority> getAuthorities() {
+	public List<Authority> getAuthorities() {
 		return authorities;
 	}
 
-	public void setAuthorities(Set<Authority> authorities) {
+	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
 	}
 

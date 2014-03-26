@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.demo.webapp.domain.Authority;
+import com.demo.webapp.domain.Group;
 import com.demo.webapp.domain.User;
 import com.demo.webapp.service.exception.PasswordIncorrectException;
 
@@ -79,5 +81,21 @@ public class UserService {
 		user.setUsername(username);
 		jdbcTemplate.update("update security_user set password = ?, email = ? where username = ?", new Object[] { user.getPassword(),
 				user.getEmail(), user.getUsername() });
+	}
+
+	public void updateUser(User user) {
+		jdbcTemplate.update("update security_user set password = ?, email = ? where id = ?",
+				new Object[] { user.getPassword(), user.getEmail(), user.getId() });
+
+		jdbcTemplate.update("delete from security_group_users where user_id = ?", new Object[] { user.getId() });
+		jdbcTemplate.update("delete from security_user_authorities where user_id = ?", new Object[] { user.getId() });
+		for (Group group : user.getGroups()) {
+			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)", new Object[] { group.getId(), user.getId() });
+		}
+		for (Authority authority : user.getAuthorities()) {
+			jdbcTemplate.update("insert into security_user_authorities(user_id, authority_id) values(?, ?)",
+					new Object[] { user.getId(), authority.getId() });
+		}
+
 	}
 }

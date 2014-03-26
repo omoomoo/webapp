@@ -1,5 +1,10 @@
 package com.demo.webapp.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.demo.webapp.domain.Authority;
+import com.demo.webapp.domain.Group;
 import com.demo.webapp.domain.User;
 import com.demo.webapp.service.AuthorityService;
 import com.demo.webapp.service.GroupService;
@@ -41,6 +48,16 @@ public class UserController {
 		model.addAttribute("authorities", authorityService.getAuthorities());
 
 		return "/security/user";
+	}
+
+	@RequestMapping(value = "/user/{id}", method = { RequestMethod.PUT })
+	public Object updateUser(@PathVariable("id") long id, User user, HttpServletRequest request, Model model) {
+		logger.debug("update User with : {}", user);
+
+		renderUser(user, request);
+		userService.updateUser(user);
+
+		return "redirect:/security/user/{id}";
 	}
 
 	/**
@@ -92,5 +109,31 @@ public class UserController {
 		}
 
 		return "redirect:/security/personal/password?success";
+	}
+
+	private void renderUser(User user, HttpServletRequest request) {
+		String[] groupIds = request.getParameterValues("group.id");
+		String[] authorityIds = request.getParameterValues("authority.id");
+
+		List<Group> groups = new ArrayList<Group>();
+		if (groupIds != null) {
+			for (String id : groupIds) {
+				Group group = new Group();
+				group.setId(Long.parseLong(id));
+				groups.add(group);
+			}
+		}
+
+		List<Authority> authorities = new ArrayList<Authority>();
+		if (authorityIds != null) {
+			for (String id : authorityIds) {
+				Authority authority = new Authority();
+				authority.setId(Long.parseLong(id));
+				authorities.add(authority);
+			}
+		}
+
+		user.setGroups(groups);
+		user.setAuthorities(authorities);
 	}
 }

@@ -36,7 +36,7 @@
 	</logger>
 
 	<logger name="jdbc.resultset">
-		<level value="info" />
+		<level value="off" />
 	</logger>
 	<logger name="jdbc.sqlonly">
 		<level value="info" />
