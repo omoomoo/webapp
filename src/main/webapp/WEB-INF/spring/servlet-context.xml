@@ -1,55 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- Spring MVC 注释功能 -->
+	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
 
-	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven content-negotiation-manager="contentNegotiationManager" />
-
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
-
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="order" value="100" />
-		<beans:property name="contentType" value="text/html" />
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
-
-	<beans:bean id="contentNegotiatingViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<beans:property name="order" value="0" />
-		<beans:property name="defaultViews">
-			<beans:list>
-				<beans:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-				<beans:bean class="org.springframework.web.servlet.view.xml.MarshallingView">
-					<beans:property name="marshaller">
-						<beans:bean class="org.springframework.oxm.xstream.XStreamMarshaller" />
-					</beans:property>
-				</beans:bean>
-			</beans:list>
-		</beans:property>
-		<beans:property name="contentNegotiationManager" ref="contentNegotiationManager" />
-	</beans:bean>
-	<beans:bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-		<beans:property name="ignoreAcceptHeader" value="true" />
-		<beans:property name="favorPathExtension" value="false" />
-		<beans:property name="favorParameter" value="true" />
-		<beans:property name="parameterName" value="format" />
-		<beans:property name="defaultContentType" value="text/html" />
-		<beans:property name="mediaTypes">
-			<beans:map>
-				<beans:entry key="html" value="text/html" />
-				<beans:entry key="xml" value="application/xml" />
-				<beans:entry key="json" value="application/json" />
-			</beans:map>
-		</beans:property>
-	</beans:bean>
-
+	<!-- 静态资源不需要拦截过滤 -->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+	
+	<!-- 扫描 Spring MVC的Bean -->
 	<context:component-scan base-package="com.demo.webapp.web" />
 
-</beans:beans>
+	<!-- 内部资源视图解析器 -->
+	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="100" />
+		<property name="contentType" value="text/html" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 内容协商视图姐解析器 -->
+	<bean id="contentNegotiatingViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="0" />
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<property name="marshaller">
+						<bean class="org.springframework.oxm.xstream.XStreamMarshaller" />
+					</property>
+				</bean>
+			</list>
+		</property>
+		<property name="contentNegotiationManager">
+			<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+				<property name="ignoreAcceptHeader" value="true" />
+				<property name="favorPathExtension" value="false" />
+				<property name="favorParameter" value="true" />
+				<property name="parameterName" value="format" />
+				<property name="defaultContentType" value="text/html" />
+				<property name="mediaTypes">
+					<map>
+						<entry key="html" value="text/html" />
+						<entry key="xml" value="application/xml" />
+						<entry key="json" value="application/json" />
+					</map>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 内容协商管理  -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="favorPathExtension" value="false" />
+		<property name="favorParameter" value="true" />
+		<property name="parameterName" value="format" />
+		<property name="defaultContentType" value="text/html" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="html" value="text/html" />
+				<entry key="xml" value="application/xml" />
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+	</bean>
+</beans>

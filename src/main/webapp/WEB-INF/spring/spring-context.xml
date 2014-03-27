@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:mongo="http://www.springframework.org/schema/data/mongo" xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:task="http://www.springframework.org/schema/task" xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:security="http://www.springframework.org/schema/security"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:util="http://www.springframework.org/schema/util" xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
 		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
@@ -19,72 +18,70 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<!-- 配置文件 -->
+	<!-- 项目配置文件 -->
 	<context:property-placeholder location="WEB-INF/classes/application.properties" />
 
-	<!-- MySQL数据源 -->
-	<beans:bean id="dataSourceSpied" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-		<beans:property name="driverClass" value="${jdbc.driver}" />
-		<beans:property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
-		<beans:property name="username" value="${jdbc.username}" />
-		<beans:property name="password" value="${jdbc.password}" />
-		<beans:property name="maxConnectionsPerPartition" value="${jdbc.maxConnectionsPerPartition}" />
-		<beans:property name="minConnectionsPerPartition" value="${jdbc.minConnectionsPerPartition}" />
-		<beans:property name="partitionCount" value="${jdbc.partitionCount}" />
-		<beans:property name="acquireIncrement" value="5" />
-		<beans:property name="statementsCacheSize" value="100" />
-		<beans:property name="releaseHelperThreads" value="3" />
-	</beans:bean>
-
-	<beans:bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
-		<beans:constructor-arg ref="dataSourceSpied" />
-	</beans:bean>
+	<!-- 数据源 -->
+	<bean id="dataSourceSpied" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxConnectionsPerPartition" value="${jdbc.maxConnectionsPerPartition}" />
+		<property name="minConnectionsPerPartition" value="${jdbc.minConnectionsPerPartition}" />
+		<property name="partitionCount" value="${jdbc.partitionCount}" />
+		<property name="acquireIncrement" value="5" />
+		<property name="statementsCacheSize" value="100" />
+		<property name="releaseHelperThreads" value="3" />
+	</bean>
+	<!-- log4jdbc代理数据源 -->
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceSpied" />
+	</bean>
 	<!-- JDBC Template -->
-	<beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<beans:property name="dataSource" ref="dataSource" />
-	</beans:bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
-	<!-- Hibernate 事务 -->
-	<beans:bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<beans:property name="dataSource" ref="dataSource" />
-	</beans:bean>
+	<!-- JDBC事务 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<!-- SessionFactory -->
-	<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="packagesToScan" value="com.demo.webapp.domain" />
-		<beans:property name="hibernateProperties">
-			<beans:props>
-				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</beans:prop>
-				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
-				<beans:prop key="hibernate.show_sql">true</beans:prop>
-				<beans:prop key="hibernate.format_sql">true</beans:prop>
-			</beans:props>
-		</beans:property>
-	</beans:bean>
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.demo.webapp.domain" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
 	<tx:annotation-driven transaction-manager="txManager" />
 
-	<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
+	<!-- 事务建议 -->
 	<tx:advice id="txAdvice" transaction-manager="txManager">
-		<!-- the transactional semantics... -->
+		<!-- 事务语义 -->
 		<tx:attributes>
-			<!-- all methods starting with 'get' are read-only -->
 			<tx:method name="get*" read-only="true" />
 			<tx:method name="find*" read-only="true" />
 			<tx:method name="query*" read-only="true" />
 			<tx:method name="check*" read-only="true" />
-			<!-- other methods use the default transaction settings (see below) -->
-			<tx:method name="*" propagation="REQUIRED" />
+			<tx:method name="*" />
 		</tx:attributes>
 	</tx:advice>
 
-	<!-- ensure that the above transactional advice runs for any execution of an operation defined by the FooService interface -->
+	<!-- 事务AOP切点  -->
 	<aop:config>
 		<aop:pointcut id="serviceOperation" expression="execution(* com.demo.webapp.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
 	</aop:config>
 
+	<!-- 扫描Spring Context的Bean -->
+	<context:component-scan base-package="com.demo.webapp.domain" />
 	<context:component-scan base-package="com.demo.webapp.service" />
 	<context:component-scan base-package="com.demo.webapp.repository" />
-	<context:component-scan base-package="com.demo.webapp.domain" />
-
-</beans:beans>
+</beans>
