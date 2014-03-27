@@ -23,6 +23,7 @@
 		<location>/WEB-INF/views/errors/error.jsp</location>
 	</error-page>
 
+	<!-- Spring Context -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/spring-context.xml,/WEB-INF/spring/spring-security.xml</param-value>
@@ -30,6 +31,8 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+	<!-- Servlet Context -->
 	<servlet>
 		<servlet-name>webapp</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -43,6 +46,8 @@
 		<servlet-name>webapp</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+	<!-- Spring Security Filter -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -54,7 +59,8 @@
 	<listener>
 		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
 	</listener>
-	<!-- 使Spring MVC支持PUT,DELETE请求 -->
+
+	<!-- Spring MVC REST Filter -->
 	<filter>
 		<filter-name>HiddenHttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
@@ -63,6 +69,8 @@
 		<filter-name>HiddenHttpMethodFilter</filter-name>
 		<servlet-name>webapp</servlet-name>
 	</filter-mapping>
+
+	<!-- Character Encoding Filter -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
