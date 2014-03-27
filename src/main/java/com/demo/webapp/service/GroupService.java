@@ -45,21 +45,18 @@ public class GroupService {
 	public void updateGroup(Group group) throws GroupNameAlreadyExistsException {
 		// 需要判断group name是否已经存在
 
-		jdbcTemplate.update("update security_group set name = ? where id = ? ",
-				new Object[] { group.getName(), group.getId() });
+		jdbcTemplate.update("update security_group set name = ? where id = ? ", new Object[] { group.getName(), group.getId() });
 
 		jdbcTemplate.update("delete from security_group_users where group_id = ?", new Object[] { group.getId() });
-		jdbcTemplate
-				.update("delete from security_group_authorities where group_id = ?", new Object[] { group.getId() });
+		jdbcTemplate.update("delete from security_group_authorities where group_id = ?", new Object[] { group.getId() });
 
 		// TODO 改用批量更新
 		for (User user : group.getUsers()) {
-			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)", new Object[] {
-					group.getId(), user.getId() });
+			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)", new Object[] { group.getId(), user.getId() });
 		}
 		for (Authority authority : group.getAuthorities()) {
-			jdbcTemplate.update("insert into security_group_authorities(group_id, authority_id) values(?, ?)",
-					new Object[] { group.getId(), authority.getId() });
+			jdbcTemplate.update("insert into security_group_authorities(group_id, authority_id) values(?, ?)", new Object[] { group.getId(),
+					authority.getId() });
 		}
 	}
 
@@ -68,15 +65,14 @@ public class GroupService {
 	}
 
 	public Group getGroup(String name) {
-		List<Group> groups = jdbcTemplate.query("select * from security_group where name = ? limit 1",
-				new Object[] { name }, new GroupMapper());
+		List<Group> groups = jdbcTemplate.query("select * from security_group where name = ? limit 1", new Object[] { name }, new GroupMapper());
 
 		return groups.size() > 0 ? groups.get(0) : null;
 	}
 
 	public Group getGroup(long id, String name) {
-		List<Group> groups = jdbcTemplate.query("select * from security_group where id = ? and name = ? limit 1",
-				new Object[] { id, name }, new GroupMapper());
+		List<Group> groups = jdbcTemplate.query("select * from security_group where id = ? and name = ? limit 1", new Object[] { id, name },
+				new GroupMapper());
 
 		return groups.size() > 0 ? groups.get(0) : null;
 	}

@@ -42,8 +42,13 @@ public class UserRepository {
 	}
 
 	public User getUser(String username) {
-		return jdbcTemplate.queryForObject("select id from security_user where username = ? ",
-				new Object[] { username }, new UserMapper());
+		User dbUser = jdbcTemplate.queryForObject("select * from security_user where username = ? ", new Object[] { username }, new UserMapper());
+
+		if (dbUser != null) {
+			return getUser(dbUser.getId());
+		}
+
+		return null;
 	}
 
 	public List<User> getUsers() {

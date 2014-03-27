@@ -53,13 +53,16 @@ public class UserService {
 	}
 
 	public void updatePersonalDetails(User user) {
-		// Not all attributes can be changed
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = userDetails.getUsername();
 
-		user.setUsername(username);
-		jdbcTemplate.update("update security_user set password = ?, email = ? where username = ?",
-				new Object[] { user.getPassword(), user.getEmail(), user.getUsername() });
+		User dbUser = getUser(username);
+
+		// Not all attributes can be changed
+		dbUser.setPassword(user.getPassword());
+		dbUser.setEmail(user.getEmail());
+
+		updateUser(dbUser);
 	}
 
 	public void updateUser(User user) {
