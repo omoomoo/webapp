@@ -45,7 +45,7 @@ public class UserService {
 	public boolean checkPassword(String username, String password) {
 		User user = this.getUser(username);
 
-		return user.getPassword() == password;
+		return user.getPassword().equals(password);
 	}
 
 	public User getUser(String username) {
