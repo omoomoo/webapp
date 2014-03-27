@@ -3,6 +3,7 @@ package com.demo.webapp.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "security_user")
@@ -28,9 +27,8 @@ public class User {
 	@Column(nullable = false)
 	private boolean enabled;
 	@Column
-	@Email
 	private String email;
-	@ManyToMany(mappedBy = "users")
+	@ManyToMany(mappedBy = "users", cascade = { CascadeType.REFRESH })
 	private List<Group> groups = new ArrayList<Group>();
 	@ManyToMany
 	@JoinTable(name = "security_user_authorities", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))

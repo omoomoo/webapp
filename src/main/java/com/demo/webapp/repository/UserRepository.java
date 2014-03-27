@@ -2,6 +2,8 @@ package com.demo.webapp.repository;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,8 @@ public class UserRepository {
 	private final static String UPDATE_PASSWORD_SQL = "update security_user set password = ? where username = ?";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	public User getUser(long id) {
 		Object[] params = new Object[] { id };
@@ -47,20 +51,32 @@ public class UserRepository {
 	}
 
 	public void updateUser(User user) {
-		jdbcTemplate.update("update security_user set password = ?, email = ?, enabled = ? where id = ?", new Object[] {
-				user.getPassword(), user.getEmail(), user.isEnabled(), user.getId() });
+		Session session = sessionFactory.getCurrentSession();
 
-		jdbcTemplate.update("delete from security_group_users where user_id = ?", new Object[] { user.getId() });
-		jdbcTemplate.update("delete from security_user_authorities where user_id = ?", new Object[] { user.getId() });
+		User dbUser = this.getUser(user.getId());
 
-		for (Group group : user.getGroups()) {
-			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)", new Object[] {
-					group.getId(), user.getId() });
-		}
-		for (Authority authority : user.getAuthorities()) {
-			jdbcTemplate.update("insert into security_user_authorities(user_id, authority_id) values(?, ?)",
-					new Object[] { user.getId(), authority.getId() });
-		}
+		user.setUsername(dbUser.getUsername());
+		session.update(user);
+
+		// jdbcTemplate.update("update security_user set password = ?, email = ?, enabled = ? where id = ?",
+		// new Object[] {
+		// user.getPassword(), user.getEmail(), user.isEnabled(), user.getId()
+		// });
+		//
+		// jdbcTemplate.update("delete from security_group_users where user_id = ?",
+		// new Object[] { user.getId() });
+		// jdbcTemplate.update("delete from security_user_authorities where user_id = ?",
+		// new Object[] { user.getId() });
+		//
+		// for (Group group : user.getGroups()) {
+		// jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)",
+		// new Object[] {
+		// group.getId(), user.getId() });
+		// }
+		// for (Authority authority : user.getAuthorities()) {
+		// jdbcTemplate.update("insert into security_user_authorities(user_id, authority_id) values(?, ?)",
+		// new Object[] { user.getId(), authority.getId() });
+		// }
 	}
 
 	public void updatePassword(String username, String password) {
