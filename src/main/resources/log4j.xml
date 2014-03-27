@@ -20,7 +20,7 @@
 		</layout>
 	</appender>
 
-	<!-- 系统日志  -->
+	<!-- 系统日志 -->
 	<logger name="com.demo.webapp">
 		<level value="debug" />
 		<appender-ref ref="webapp" />
@@ -28,7 +28,7 @@
 
 	<!-- 第三方日志 -->
 	<logger name="org.springframework.web">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	<logger name="org.springframework.jdbc">
 		<level value="debug" />
@@ -40,7 +40,7 @@
 		<level value="info" />
 	</logger>
 
-	<!-- 根日志  -->
+	<!-- 根日志 -->
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
