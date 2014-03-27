@@ -95,11 +95,11 @@ public class UserService {
 
 		jdbcTemplate.update("delete from security_group_users where user_id = ?", new Object[] { user.getId() });
 		jdbcTemplate.update("delete from security_user_authorities where user_id = ?", new Object[] { user.getId() });
+
 		for (Group group : user.getGroups()) {
 			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)", new Object[] {
 					group.getId(), user.getId() });
 		}
-
 		for (Authority authority : user.getAuthorities()) {
 			jdbcTemplate.update("insert into security_user_authorities(user_id, authority_id) values(?, ?)",
 					new Object[] { user.getId(), authority.getId() });

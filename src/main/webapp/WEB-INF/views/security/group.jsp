@@ -28,7 +28,7 @@
 							<div class="control-group">
 								<label class="control-label">权限组 :</label>
 								<div class="controls">
-									<input type="text" class="span11" placeholder="权限组" readonly="readonly"
+									<input type="text" class="span11" placeholder="权限组" readonly="readonly" name="name"
 										value="<c:url value="${group.name }"/>" />
 								</div>
 							</div>

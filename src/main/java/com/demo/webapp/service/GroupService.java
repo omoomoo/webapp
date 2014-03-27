@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.demo.webapp.domain.Authority;
+import com.demo.webapp.domain.Group;
+import com.demo.webapp.domain.User;
+
 @Service
 public class GroupService {
 	private static final String QUERY_GROUPS_SQL = "select * from security_group";
@@ -31,5 +35,26 @@ public class GroupService {
 		group.put("authorities", authorities);
 
 		return group;
+	}
+
+	public void updateGroup(Group group) {
+		// TODO 名字冲突异常
+		
+		jdbcTemplate.update("update security_group set name = ? where id = ? ",
+				new Object[] { group.getName(), group.getId() });
+
+		jdbcTemplate.update("delete from security_group_users where group_id = ?", new Object[] { group.getId() });
+		jdbcTemplate.update("delete from security_group_authorities where group_id = ?",
+				new Object[] { group.getId() });
+
+		for (User user : group.getUsers()) {
+			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)",
+					new Object[] { group.getId(), user.getId() });
+		}
+		for (Authority authority : group.getAuthorities()) {
+			jdbcTemplate.update("insert into security_group_authorities(group_id, authority_id) values(?, ?)", new Object[] {
+					group.getId(), authority.getId() });
+		}
+
 	}
 }
