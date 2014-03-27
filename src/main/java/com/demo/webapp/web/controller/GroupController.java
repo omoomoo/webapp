@@ -18,6 +18,7 @@ import com.demo.webapp.domain.User;
 import com.demo.webapp.service.AuthorityService;
 import com.demo.webapp.service.GroupService;
 import com.demo.webapp.service.UserService;
+import com.demo.webapp.service.exception.GroupNameAlreadyExistsException;
 
 @Controller
 @RequestMapping(value = { "/security" })
@@ -48,7 +49,12 @@ public class GroupController {
 	public String getGroup(Group group, HttpServletRequest request, Model model) {
 
 		renderGroup(group, request);
-		groupService.updateGroup(group);
+		try {
+			groupService.updateGroup(group);
+		} catch (GroupNameAlreadyExistsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		model.addAttribute("users", userService.getUsers());
 		model.addAttribute("authorities", authorityService.getAuthorities());

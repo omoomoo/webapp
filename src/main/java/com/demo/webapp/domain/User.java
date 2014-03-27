@@ -1,9 +1,7 @@
 package com.demo.webapp.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "security_user")
@@ -28,6 +28,7 @@ public class User {
 	@Column(nullable = false)
 	private boolean enabled;
 	@Column
+	@Email
 	private String email;
 	@ManyToMany(mappedBy = "users")
 	private List<Group> groups = new ArrayList<Group>();
@@ -93,8 +94,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled + ", email=" + email + ", groups="
-				+ groups + ", authorities=" + authorities + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
+				+ ", email=" + email + ", groups=" + groups + ", authorities=" + authorities + "]";
 	}
-
 }
