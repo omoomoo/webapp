@@ -9,39 +9,30 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	<appender name="dest" class="org.apache.log4j.DailyRollingFileAppender">
+	<appender name="webapp" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="file" value="${catalina.home}/logs/webapp/webapp" />
 		<param name="threshold" value="debug" />
 		<param name="immediateFlush" value="true" />
 		<param name="append" value="true" />
 		<param name="datePattern" value="'.'yyyy-MM-dd'.log'" />
-
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="conversionPattern" value="[%d{MMdd HH:mm:ss SSS\} %-5p] [%t] %c{3\} - %m%n" />
 		</layout>
 	</appender>
 
-	<!-- Application Loggers -->
+	<!-- 系统日志  -->
 	<logger name="com.demo.webapp">
 		<level value="debug" />
-		<appender-ref ref="dest" />
+		<appender-ref ref="webapp" />
 	</logger>
 
-	<!-- 3rdparty Loggers -->
+	<!-- 第三方日志 -->
 	<logger name="org.springframework.web">
 		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.jdbc">
 		<level value="debug" />
 	</logger>
-	<!-- 
-	<logger name="jdbc.resultset">
-		<level value="off" />
-	</logger>
-	<logger name="jdbc.sqlonly">
-		<level value="info" />
-	</logger>
-	 -->
 	<logger name="jdbc.sqltiming">
 		<level value="info" />
 	</logger>
@@ -49,7 +40,7 @@
 		<level value="info" />
 	</logger>
 
-	<!-- Root Logger -->
+	<!-- 根日志  -->
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
