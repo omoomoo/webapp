@@ -29,18 +29,19 @@
 
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.jdbc">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
-
+	<!-- 
 	<logger name="jdbc.resultset">
 		<level value="off" />
 	</logger>
 	<logger name="jdbc.sqlonly">
 		<level value="info" />
 	</logger>
+	 -->
 	<logger name="jdbc.sqltiming">
 		<level value="info" />
 	</logger>
