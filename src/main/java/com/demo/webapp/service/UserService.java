@@ -34,9 +34,11 @@ public class UserService {
 	}
 
 	public Object getUser(long id) {
-		Map<String, Object> user = jdbcTemplate.queryForMap(QUERY_USER_BY_ID_SQL, new Object[] { id });
-		List<Map<String, Object>> groups = jdbcTemplate.queryForList(QUERY_GROUPS_BY_USERID, new Object[] { id });
-		List<Map<String, Object>> authorities = jdbcTemplate.queryForList(QUERY_AUTHORITIES_BY_USERID, new Object[] { id });
+		Object[] params = new Object[] { id };
+
+		Map<String, Object> user = jdbcTemplate.queryForMap(QUERY_USER_BY_ID_SQL, params);
+		List<Map<String, Object>> groups = jdbcTemplate.queryForList(QUERY_GROUPS_BY_USERID, params);
+		List<Map<String, Object>> authorities = jdbcTemplate.queryForList(QUERY_AUTHORITIES_BY_USERID, params);
 
 		user.put("groups", groups);
 		user.put("authorities", authorities);
@@ -60,13 +62,15 @@ public class UserService {
 	}
 
 	public boolean checkPassword(String username, String password) {
-		List<Map<String, Object>> users = jdbcTemplate.queryForList(CHECK_PASSPORD_SQL, new Object[] { username, password });
+		List<Map<String, Object>> users = jdbcTemplate.queryForList(CHECK_PASSPORD_SQL, new Object[] { username,
+				password });
 
 		return users.size() == 1;
 	}
 
 	public Object getUser(String username) {
-		long id = jdbcTemplate.queryForObject("select id from security_user where username = ? ", new Object[] { username }, Long.class);
+		long id = jdbcTemplate.queryForObject("select id from security_user where username = ? ",
+				new Object[] { username }, Long.class);
 		if (id <= 0) {
 			return null;
 		}
@@ -80,19 +84,20 @@ public class UserService {
 		String username = userDetails.getUsername();
 
 		user.setUsername(username);
-		jdbcTemplate.update("update security_user set password = ?, email = ? where username = ?", new Object[] { user.getPassword(),
-				user.getEmail(), user.getUsername() });
+		jdbcTemplate.update("update security_user set password = ?, email = ? where username = ?",
+				new Object[] { user.getPassword(), user.getEmail(), user.getUsername() });
 	}
 
 	@Transactional
 	public void updateUser(User user) {
-		jdbcTemplate.update("update security_user set password = ?, email = ?, enabled = ? where id = ?",
-				new Object[] { user.getPassword(), user.getEmail(), user.isEnabled(), user.getId() });
+		jdbcTemplate.update("update security_user set password = ?, email = ?, enabled = ? where id = ?", new Object[] {
+				user.getPassword(), user.getEmail(), user.isEnabled(), user.getId() });
 
 		jdbcTemplate.update("delete from security_group_users where user_id = ?", new Object[] { user.getId() });
 		jdbcTemplate.update("delete from security_user_authorities where user_id = ?", new Object[] { user.getId() });
 		for (Group group : user.getGroups()) {
-			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)", new Object[] { group.getId(), user.getId() });
+			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)", new Object[] {
+					group.getId(), user.getId() });
 		}
 
 		for (Authority authority : user.getAuthorities()) {
