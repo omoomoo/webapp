@@ -126,6 +126,11 @@
 								</c:forEach>
 							</table>
 							<div class="form-actions">
+								<c:if test="${success != null}">
+									<div class="alert alert-success alert-block">
+										<a class="close" data-dismiss="alert" href="#">×</a> <span>${success }</span>
+									</div>
+								</c:if>
 								<button type="submit" class="btn btn-success">全部更新</button>
 							</div>
 						</div>

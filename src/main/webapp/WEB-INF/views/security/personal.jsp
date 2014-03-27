@@ -29,11 +29,13 @@
 							<h5>个人信息</h5>
 						</div>
 						<div class="widget-content no-padding">
-							<form:form action="" method="PUT" class="form-horizontal">
+							<c:url var="url" value="/security/personal" />
+							<form:form action="${url }" method="PUT" class="form-horizontal">
 								<div class="control-group">
 									<label class="control-label"> 用户名 :</label>
 									<div class="controls">
-										<input type="text" class="span11" placeholder="用户名" name="username" value="<c:out value="${user.username}"/>" readonly="readonly" />
+										<input type="text" class="span11" placeholder="用户名" name="username" value="<c:out value="${user.username}"/>"
+											readonly="readonly" />
 									</div>
 								</div>
 								<div class="control-group">
@@ -49,7 +51,7 @@
 									</div>
 								</div>
 								<div class="form-actions">
-									<c:if test="${param.success != null}">
+									<c:if test="${param.success != nul}">
 										<div class="alert alert-success alert-block">
 											<a class="close" data-dismiss="alert" href="#">×</a> <span>您的信息已成功更新！</span>
 										</div>

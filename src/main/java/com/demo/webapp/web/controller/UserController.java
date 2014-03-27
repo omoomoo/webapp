@@ -1,10 +1,13 @@
 package com.demo.webapp.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,11 +68,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/{id}", method = { RequestMethod.PUT })
-	public Object updateUser(@PathVariable("id") long id, User user, HttpServletRequest request, Model model) {
+	public Object updateUser(@PathVariable("id") long id, User user, HttpServletRequest request, Model model, RedirectAttributes redirect) {
 		logger.debug("update User with : {}", user);
 
 		renderUser(user, request);
 		userService.updateUser(user);
+
+		redirect.addFlashAttribute("success", "更新用户信息成功！");
 
 		return "redirect:/security/user/{id}";
 	}
@@ -92,7 +97,6 @@ public class UserController {
 	@RequestMapping(value = "/personal", method = RequestMethod.PUT)
 	public String updatePersonalDetails(User user, RedirectAttributes redirectAttributes) {
 		logger.debug("修改个人信息 : {}", user);
-
 		userService.updatePersonalDetails(user);
 
 		return "redirect:/security/personal?success";
@@ -110,7 +114,7 @@ public class UserController {
 	 * 修改个人密码
 	 */
 	@RequestMapping(value = "/personal/password", method = RequestMethod.PUT)
-	public String changePassword(String oldPassword, String newPassword, Model model, RedirectAttributes redirectAttributes) {
+	public String changePassword(String oldPassword, String newPassword, Model model, RedirectAttributes redirect) {
 		try {
 			userService.changePassword(oldPassword, newPassword);
 		} catch (PasswordIncorrectException e) {
@@ -149,5 +153,12 @@ public class UserController {
 
 		user.setGroups(groups);
 		user.setAuthorities(authorities);
+	}
+
+	public static Map<String, Object> SUCCESS_MESSAGE(String message) {
+		Map<String, Object> rs = new HashMap<String, Object>();
+		rs.put("status", true);
+		rs.put("message", message);
+		return rs;
 	}
 }
