@@ -94,4 +94,7 @@
 	<context:component-scan base-package="com.demo.webapp.domain" />
 	<context:component-scan base-package="com.demo.webapp.service" />
 	<context:component-scan base-package="com.demo.webapp.repository" />
+	
+	<!-- 导入配置资源  -->
+	<import resource="spring-security.xml"/>
 </beans>
