@@ -1,22 +1,15 @@
 <script type="text/javascript" src="<c:url value="/resources/scripts/jquery.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/jquery-ui-1.10.4.custom.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/jquery.ui-1.10.4.custom.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/jquery.select2.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/jquery.dataTables.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/jquery.uniform.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/javascript.select2.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/javascript.masked.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/bootstrap.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/bootstrap.toggle.buttons.js"/>"></script>
-<!--<script type="text/javascript" src="<c:url value="/resources/scripts/bootstrap-colorpicker.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/bootstrap-datepicker.js"/>"></script> -->
-<script type="text/javascript" src="<c:url value="/resources/scripts/masked.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/scripts/matrix.js"/>"></script>
-<!--<script type="text/javascript" src="<c:url value="/resources/scripts/matrix.form_common.js"/>"></script> -->
 <script type="text/javascript" src="<c:url value="/resources/scripts/matrix.tables.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/select2.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/highcharts.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/highcharts-exporting.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/sdk.page.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/sdk.commons.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/scripts/sdk.form.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/scripts/webapp.js"/>"></script>
 <!-- 
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800" />
  -->
