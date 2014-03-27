@@ -42,6 +42,16 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<!-- 初始化数据库数据 -->
+	<jdbc:initialize-database data-source="dataSource" enabled="false" ignore-failures="ALL">
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_schema.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_user.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_group.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_authority.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_group_authorities.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_group_users.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_user_authorities.sql" />
+	</jdbc:initialize-database>
 
 	<!-- JDBC事务 -->
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -74,7 +84,7 @@
 		</tx:attributes>
 	</tx:advice>
 
-	<!-- 事务AOP切点  -->
+	<!-- 事务AOP切点 -->
 	<aop:config>
 		<aop:pointcut id="serviceOperation" expression="execution(* com.demo.webapp.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
