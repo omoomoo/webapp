@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.webapp.domain.Authority;
 import com.demo.webapp.domain.Group;
@@ -46,18 +47,18 @@ public class GroupController {
 	}
 
 	@RequestMapping(value = "/group/{id}", method = RequestMethod.PUT)
-	public String getGroup(Group group, HttpServletRequest request, Model model) {
+	public String getGroup(Group group, Model model, HttpServletRequest request, RedirectAttributes redirect) {
 
 		renderGroup(group, request);
 		try {
 			groupService.updateGroup(group);
 		} catch (GroupNameAlreadyExistsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			model.addAttribute("users", userService.getUsers());
+			model.addAttribute("authorities", authorityService.getAuthorities());
+			return "/security/group";
 		}
 
-		model.addAttribute("users", userService.getUsers());
-		model.addAttribute("authorities", authorityService.getAuthorities());
+		redirect.addFlashAttribute("success", "更新权限组信息成功！");
 
 		return "redirect:/security/group/{id}";
 	}

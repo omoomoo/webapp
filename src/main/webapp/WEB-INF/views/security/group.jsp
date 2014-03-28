@@ -28,8 +28,7 @@
 							<div class="control-group">
 								<label class="control-label">权限组 :</label>
 								<div class="controls">
-									<input type="text" class="span11" placeholder="权限组" readonly="readonly" name="name"
-										value="<c:url value="${group.name }"/>" />
+									<input type="text" class="span11" placeholder="权限组" readonly="readonly" name="name" value="<c:url value="${group.name }"/>" />
 								</div>
 							</div>
 							<div class="control-group">
@@ -113,6 +112,9 @@
 								</c:forEach>
 							</table>
 							<div class="form-actions">
+								<c:if test="${success != null}">
+									<div class="alert alert-success alert-block">${success }</div>
+								</c:if>
 								<button type="submit" class="btn btn-success">全部更新</button>
 							</div>
 						</div>
