@@ -13,15 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.demo.webapp.domain.validator.UserAdd;
 import com.demo.webapp.domain.validator.UserChangePassword;
+import com.demo.webapp.domain.validator.UserUpdate;
 
 @Entity
 @Table(name = "security_user")
@@ -33,13 +32,14 @@ public class User {
 	@Length(message = "用户名长度必须为4-64位字符串！", min = 4, max = 64, groups = { UserAdd.class })
 	private String username;
 	@Column
-	@Length(message = "密码长度必须为8-64位字符串！", min = 8, max = 64, groups = { UserAdd.class, UserChangePassword.class })
+	@Length(message = "密码长度必须为8-64位字符串！", min = 8, max = 64, groups = { UserAdd.class, UserUpdate.class,
+			UserChangePassword.class })
 	private String password;
 	@Column(nullable = false)
-	@NotNull(groups = { UserAdd.class })
+	@NotNull(groups = { UserAdd.class, UserUpdate.class })
 	private boolean enabled;
 	@Column
-	@Email(message = "邮箱格式不合法！")
+	@Email(message = "邮箱格式不合法！", groups = { UserUpdate.class })
 	private String email;
 	@ManyToMany(mappedBy = "users", cascade = { CascadeType.REFRESH })
 	private List<Group> groups = new ArrayList<Group>();

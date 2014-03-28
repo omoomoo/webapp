@@ -51,7 +51,7 @@
 									</div>
 								</div>
 								<div class="form-actions">
-									<form:errors path="password" cssClass="alert alert-error alert-block" element="div"/>
+									<form:errors path="*" cssClass="alert alert-error alert-block" element="div"/>
 									<c:if test="${status eq 'error'}">
 										<div class="alert alert-error alert-block">${message }</div>
 									</c:if>

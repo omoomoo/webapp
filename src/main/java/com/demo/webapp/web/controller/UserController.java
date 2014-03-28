@@ -27,6 +27,7 @@ import com.demo.webapp.domain.Group;
 import com.demo.webapp.domain.User;
 import com.demo.webapp.domain.validator.UserAdd;
 import com.demo.webapp.domain.validator.UserChangePassword;
+import com.demo.webapp.domain.validator.UserUpdate;
 import com.demo.webapp.service.AuthorityService;
 import com.demo.webapp.service.GroupService;
 import com.demo.webapp.service.UserService;
@@ -63,7 +64,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/{id}", method = { RequestMethod.GET })
-	public Object getUser(@PathVariable("id") long id, Model model) {
+	public Object getUser(@PathVariable("id") long id, @ModelAttribute("user") User user, Model model) {
 		model.addAttribute("user", userService.getUser(id));
 		model.addAttribute("groups", groupService.getGroups());
 		model.addAttribute("authorities", authorityService.getAuthorities());
@@ -72,13 +73,21 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/{id}", method = { RequestMethod.PUT })
-	public Object updateUser(@PathVariable("id") long id, User user, HttpServletRequest request, Model model,
-			RedirectAttributes redirect) {
-		logger.debug("update User with : {}", user);
-
+	public Object updateUser(@PathVariable("id") long id,
+			@Validated(value = UserUpdate.class) @ModelAttribute("user") User user, BindingResult bindingResult,
+			HttpServletRequest request, Model model, RedirectAttributes redirect) {
+		// TODO 如何绑定而不需要通过自定义的方法？
 		renderUser(user, request);
-		userService.updateUser(user);
+		
+		if (bindingResult.hasErrors()) {
+			// TODO  重复代码？
+			model.addAttribute("groups", groupService.getGroups());
+			model.addAttribute("authorities", authorityService.getAuthorities());
+			return "/security/user";
+		}
 
+		logger.debug("update User with : {}", user);
+		userService.updateUser(user);
 		redirect.addFlashAttribute("success", "更新用户信息成功！");
 
 		return "redirect:/security/user/{id}";
