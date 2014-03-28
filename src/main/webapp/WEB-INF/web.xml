@@ -2,51 +2,6 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
-	<!-- 错误页面 -->
-	<error-page>
-		<error-code>400</error-code>
-		<location>/WEB-INF/views/errors/400.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/WEB-INF/views/errors/404.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/WEB-INF/views/errors/500.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>505</error-code>
-		<location>/WEB-INF/views/errors/505.jsp</location>
-	</error-page>
-	<error-page>
-		<exception-type>java.lang.Throwable</exception-type>
-		<location>/WEB-INF/views/errors/error.jsp</location>
-	</error-page>
-
-	<!-- Spring Security Filter -->
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<listener>
-		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
-	</listener>
-
-	<!-- Spring MVC REST Filter -->
-	<filter>
-		<filter-name>HiddenHttpMethodFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>HiddenHttpMethodFilter</filter-name>
-		<servlet-name>webapp</servlet-name>
-	</filter-mapping>
-
 	<!-- Character Encoding Filter -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
@@ -62,8 +17,31 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>characterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<servlet-name>webapp</servlet-name>
 	</filter-mapping>
+
+	<!-- Spring MVC REST Filter -->
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<servlet-name>webapp</servlet-name>
+	</filter-mapping>
+
+	<!-- Spring Security Filter -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<servlet-name>webapp</servlet-name>
+	</filter-mapping>
+	<listener>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
 
 	<!-- Spring Context -->
 	<context-param>
@@ -88,5 +66,27 @@
 		<servlet-name>webapp</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+	<!-- 错误页面 -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/views/errors/400.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/errors/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/errors/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>505</error-code>
+		<location>/WEB-INF/views/errors/505.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/views/errors/error.jsp</location>
+	</error-page>
 
 </web-app>

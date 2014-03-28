@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
@@ -10,7 +10,7 @@
 
 	<!-- 静态资源不需要拦截过滤 -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
-	
+
 	<!-- 扫描 Spring MVC的Bean -->
 	<context:component-scan base-package="com.demo.webapp.web" />
 
@@ -41,18 +41,18 @@
 				<property name="favorPathExtension" value="false" />
 				<property name="favorParameter" value="true" />
 				<property name="parameterName" value="format" />
-				<property name="defaultContentType" value="text/html" />
+				<property name="defaultContentType" value="text/html;charset=UTF-8" />
 				<property name="mediaTypes">
 					<map>
-						<entry key="html" value="text/html" />
-						<entry key="xml" value="application/xml" />
-						<entry key="json" value="application/json" />
+						<entry key="html" value="text/html; charset=UTF-8" />
+						<entry key="xml" value="application/xml; charset=UTF-8" />
+						<entry key="json" value="application/json; charset=UTF-8" />
 					</map>
 				</property>
 			</bean>
 		</property>
 	</bean>
-	<!-- 内容协商管理  -->
+	<!-- 内容协商管理 -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<property name="ignoreAcceptHeader" value="true" />
 		<property name="favorPathExtension" value="false" />
@@ -67,4 +67,5 @@
 			</map>
 		</property>
 	</bean>
+
 </beans>
