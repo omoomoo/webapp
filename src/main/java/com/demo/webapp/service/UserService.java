@@ -48,6 +48,16 @@ public class UserService {
 		return user.getPassword().equals(password);
 	}
 
+	/**
+	 * 获取当前用户
+	 */
+	public User getUser() {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = userDetails.getUsername();
+
+		return getUser(username);
+	}
+
 	public User getUser(String username) {
 		return userRepository.getUser(username);
 	}

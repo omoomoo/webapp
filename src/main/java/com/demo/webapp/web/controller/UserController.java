@@ -27,6 +27,7 @@ import com.demo.webapp.domain.Group;
 import com.demo.webapp.domain.User;
 import com.demo.webapp.domain.validator.UserAdd;
 import com.demo.webapp.domain.validator.UserChangePassword;
+import com.demo.webapp.domain.validator.UserPersonalUpdate;
 import com.demo.webapp.domain.validator.UserUpdate;
 import com.demo.webapp.service.AuthorityService;
 import com.demo.webapp.service.GroupService;
@@ -78,9 +79,8 @@ public class UserController {
 			HttpServletRequest request, Model model, RedirectAttributes redirect) {
 		// TODO 如何绑定而不需要通过自定义的方法？
 		renderUser(user, request);
-		
 		if (bindingResult.hasErrors()) {
-			// TODO  重复代码？
+			// TODO 重复代码？
 			model.addAttribute("groups", groupService.getGroups());
 			model.addAttribute("authorities", authorityService.getAuthorities());
 			return "/security/user";
@@ -97,11 +97,10 @@ public class UserController {
 	 * 个人信息页面
 	 */
 	@RequestMapping(value = "/personal", method = RequestMethod.GET)
-	public String getPersonalDetails(Model model) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = userDetails.getUsername();
+	public String getPersonalDetails(@ModelAttribute("user") User user, Model model) {
+		user = userService.getUser();
 
-		model.addAttribute("user", userService.getUser(username));
+		model.addAttribute("user", user);
 		return "security/personal";
 	}
 
@@ -109,8 +108,18 @@ public class UserController {
 	 * 修改个人信息页面
 	 */
 	@RequestMapping(value = "/personal", method = RequestMethod.PUT)
-	public String updatePersonalDetails(User user, RedirectAttributes redirectAttributes) {
+	public String updatePersonalDetails(@Validated(value = UserPersonalUpdate.class) @ModelAttribute("user") User user,
+			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+
 		logger.debug("修改个人信息 : {}", user);
+
+		if (bindingResult.hasErrors()) {
+			User dbUser = userService.getUser();
+			user.setAuthorities(dbUser.getAuthorities());
+			user.setGroups(dbUser.getGroups());
+			return "security/personal";
+		}
+
 		userService.updatePersonalDetails(user);
 
 		return "redirect:/security/personal?success";

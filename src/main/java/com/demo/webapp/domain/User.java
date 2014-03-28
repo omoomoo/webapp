@@ -20,6 +20,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.demo.webapp.domain.validator.UserAdd;
 import com.demo.webapp.domain.validator.UserChangePassword;
+import com.demo.webapp.domain.validator.UserPersonalUpdate;
 import com.demo.webapp.domain.validator.UserUpdate;
 
 @Entity
@@ -33,13 +34,13 @@ public class User {
 	private String username;
 	@Column
 	@Length(message = "密码长度必须为8-64位字符串！", min = 8, max = 64, groups = { UserAdd.class, UserUpdate.class,
-			UserChangePassword.class })
+			UserPersonalUpdate.class, UserChangePassword.class, })
 	private String password;
 	@Column(nullable = false)
 	@NotNull(groups = { UserAdd.class, UserUpdate.class })
 	private boolean enabled;
 	@Column
-	@Email(message = "邮箱格式不合法！", groups = { UserUpdate.class })
+	@Email(message = "邮箱格式不合法！", groups = { UserAdd.class, UserUpdate.class, UserPersonalUpdate.class, })
 	private String email;
 	@ManyToMany(mappedBy = "users", cascade = { CascadeType.REFRESH })
 	private List<Group> groups = new ArrayList<Group>();

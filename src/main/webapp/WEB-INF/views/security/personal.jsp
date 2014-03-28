@@ -30,12 +30,11 @@
 						</div>
 						<div class="widget-content no-padding">
 							<c:url var="url" value="/security/personal" />
-							<form:form action="${url }" method="PUT" class="form-horizontal">
+							<form:form action="${url }" method="PUT" modelAttribute="user" cssClass="form-horizontal">
 								<div class="control-group">
 									<label class="control-label"> 用户名 :</label>
 									<div class="controls">
-										<input type="text" class="span11" placeholder="用户名" name="username" value="<c:out value="${user.username}"/>"
-											readonly="readonly" />
+										<form:input path="username" cssClass="span11" readonly="true" placeholder="用户名"/>
 									</div>
 								</div>
 								<div class="control-group">
@@ -51,6 +50,7 @@
 									</div>
 								</div>
 								<div class="form-actions">
+									<form:errors path="*" cssClass="alert alert-error alert-block" element="div"/>
 									<c:if test="${param.success != nul}">
 										<div class="alert alert-success alert-block">
 											<a class="close" data-dismiss="alert" href="#">×</a> <span>您的信息已成功更新！</span>
