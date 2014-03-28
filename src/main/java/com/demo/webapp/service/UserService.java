@@ -39,7 +39,7 @@ public class UserService {
 			throw new PasswordIncorrectException("您输入的旧密码不正确，请重新输入！");
 		}
 
-		userRepository.updatePassword(username, oldPassword);
+		userRepository.updatePassword(username, newPassword);
 	}
 
 	public boolean checkPassword(String username, String password) {

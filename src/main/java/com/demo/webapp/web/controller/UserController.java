@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.demo.webapp.domain.Authority;
 import com.demo.webapp.domain.Group;
 import com.demo.webapp.domain.User;
+import com.demo.webapp.domain.validator.UserAdd;
+import com.demo.webapp.domain.validator.UserChangePassword;
 import com.demo.webapp.service.AuthorityService;
 import com.demo.webapp.service.GroupService;
 import com.demo.webapp.service.UserService;
@@ -46,7 +50,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user", method = { RequestMethod.POST })
-	public void addUser(User user, HttpServletRequest request, Model model) {
+	public void addUser(@Validated(value = UserAdd.class) User user, HttpServletRequest request, Model model) {
 		logger.debug("add User with : {}", user);
 
 		renderUser(user, request);
@@ -68,7 +72,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/{id}", method = { RequestMethod.PUT })
-	public Object updateUser(@PathVariable("id") long id, User user, HttpServletRequest request, Model model, RedirectAttributes redirect) {
+	public Object updateUser(@PathVariable("id") long id, User user, HttpServletRequest request, Model model,
+			RedirectAttributes redirect) {
 		logger.debug("update User with : {}", user);
 
 		renderUser(user, request);
@@ -106,7 +111,7 @@ public class UserController {
 	 * 修改密码页面
 	 */
 	@RequestMapping(value = "/personal/password", method = RequestMethod.GET)
-	public String getPasswrodPage() {
+	public String getPasswrodPage(@ModelAttribute("user") User user) {
 		return "/security/password";
 	}
 
@@ -114,14 +119,18 @@ public class UserController {
 	 * 修改个人密码
 	 */
 	@RequestMapping(value = "/personal/password", method = RequestMethod.PUT)
-	public String changePassword(String oldPassword, String newPassword, Model model, RedirectAttributes redirect) {
+	public String changePassword(@Validated(value = { UserChangePassword.class }) @ModelAttribute("user") User user,
+			BindingResult bindingResult, String oldPassword, Model model, RedirectAttributes redirect) {
+		if (bindingResult.hasErrors()) {
+			return "/security/password";
+		}
+
 		try {
-			userService.changePassword(oldPassword, newPassword);
+			userService.changePassword(oldPassword, user.getPassword());
 		} catch (PasswordIncorrectException e) {
 			model.addAttribute("status", "error");
 			model.addAttribute("message", e.getMessage());
-			model.addAttribute("oldPassword", oldPassword);
-			model.addAttribute("newPassword", newPassword);
+			model.addAttribute("newPassword", user.getPassword());
 
 			return "/security/password";
 		}
