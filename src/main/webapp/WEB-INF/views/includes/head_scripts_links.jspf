@@ -1,3 +1,4 @@
+<link rel="icon" href="<c:url value="/resources/images/large.ico"/>">
 <link rel="stylesheet" href="<c:url value="/resources/styles/bootstrap.min.css"/>" />
 <link rel="stylesheet" href="<c:url value="/resources/styles/bootstrap.responsive.min.css"/>" />
 <link rel="stylesheet" href="<c:url value="/resources/styles/jquery.gritter.css"/>" />
