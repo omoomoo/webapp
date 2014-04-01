@@ -28,7 +28,7 @@
 						<div class="widget-title">
 							<span class="icon"><i class="icon-th"></i></span>
 							<h5>权限组列表</h5>
-							<span class="btn icon-plus-sign add-user-trigger" style="float:right;margin-top:7px; margin-right:8px;">添加权限组</span>
+							<span class="btn icon-plus-sign add-group-trigger" style="float:right;margin-top:7px; margin-right:8px;">添加权限组</span>
 						</div>
 						<div class="widget-content nopadding">
 							<table class="table table-bordered groups-table">
