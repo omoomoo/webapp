@@ -105,6 +105,13 @@ public class GroupController {
 		return "redirect:/security/group/{id}";
 	}
 
+	@RequestMapping(value = "/group/{id}", method = RequestMethod.DELETE)
+	public String deleteGroup(@PathVariable("id") long id, Model model) {
+		groupService.deleteGroup(id);
+		model.addAttribute("success", "删除权限组操作成功！");
+		return "security/group";
+	}
+
 	private void renderGroup(Group group, HttpServletRequest request) {
 		String[] userIds = request.getParameterValues("user.id");
 		String[] authorityIds = request.getParameterValues("authority.id");

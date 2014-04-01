@@ -46,7 +46,11 @@
 											<td><c:out value="${group.id }" /></td>
 											<td><c:out value="${group.name }" /></td>
 											<td><c:out value="${group.name }" />-说明</td>
-											<td><span class="query-group-trigger" data-user-url="<c:url value="/security/group/${group.id }" />">修改信息</span></td>
+											<td>
+												<span class="query-group-trigger" data-user-url="<c:url value="/security/group/${group.id }" />">修改信息</span>
+												&nbsp;&nbsp;
+												<span class="delete-group-trigger" data-user-url="<c:url value="/security/group/${group.id }" />">删除</span>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -63,6 +67,7 @@
 	<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
 	<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 	<script type="text/javascript">
+		// 重复代码
 		$('.groups-table').dataTable({
 			'bJQueryUI' : true,
 			'sPaginationType' : "full_numbers",
@@ -80,6 +85,25 @@
 		
 		$('.add-group-trigger').click(function(){
 			window.openWindow('<c:url value="/security/group"/>', '权限组信息');
+		});
+		
+		//TODO 重复代码
+		$('.delete-group-trigger').click(function() {
+			var url = $(this).attr('data-user-url');
+
+			if (!window.confirm('你去要删除该用户吗 ?')) {
+				return;
+			}
+
+			$.post(url, {
+				'_format' : 'json',
+				'_method' : 'DELETE',
+				'${_csrf.parameterName}' : '${_csrf.token}',
+			}, function(data) {
+				window.alert(data.success || data.error);
+				window.location.reload();
+			});
+
 		});
 	</script>
 </body>

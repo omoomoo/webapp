@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.demo.webapp.domain.Group;
 import com.demo.webapp.repository.GroupRepository;
+import com.demo.webapp.service.exception.GroupNameAlreadyExists;
 import com.demo.webapp.service.exception.GroupNameAlreadyExistsException;
 
 @Service
@@ -32,5 +33,18 @@ public class GroupService {
 
 	public Group getGroup(String name) {
 		return groupRepository.getGroup(name);
+	}
+
+	public void addGroup(Group group) throws GroupNameAlreadyExists {
+		if (getGroup(group.getName()) != null) {
+			throw new GroupNameAlreadyExists("权限组'" + group.getName() + "'已经存在！");
+		}
+
+		groupRepository.addGroup(group);
+	}
+
+	public void deleteGroup(long id) {
+		groupRepository.deleteGroup(id);
+
 	}
 }

@@ -90,6 +90,7 @@
 			window.openWindow('<c:url value="/security/user"/>', '用户信息');
 		});
 
+		//TODO 重复代码
 		$('.delete-user-trigger').click(function() {
 			var url = $(this).attr('data-user-url');
 
