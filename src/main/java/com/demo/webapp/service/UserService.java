@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.demo.webapp.domain.User;
 import com.demo.webapp.repository.UserRepository;
 import com.demo.webapp.service.exception.PasswordIncorrectException;
+import com.demo.webapp.service.exception.UsernameAlreadyExistsException;
 
 @Service
 public class UserService {
@@ -27,8 +28,13 @@ public class UserService {
 		return userRepository.getUser(id);
 	}
 
-	public void addUser(User user) {
+	public void addUser(User user) throws UsernameAlreadyExistsException {
+		// 用户名是否存在
+		if (getUser(user.getUsername()) != null) {
+			throw new UsernameAlreadyExistsException("用户名已经存在！");
+		}
 
+		userRepository.addUser(user);
 	}
 
 	public void changePassword(String oldPassword, String newPassword) throws PasswordIncorrectException {

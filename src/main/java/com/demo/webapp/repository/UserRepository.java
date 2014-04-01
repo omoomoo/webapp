@@ -1,11 +1,15 @@
 package com.demo.webapp.repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.demo.webapp.domain.Authority;
@@ -29,7 +33,13 @@ public class UserRepository {
 	public User getUser(long id) {
 		Object[] params = new Object[] { id };
 
-		User user = jdbcTemplate.queryForObject(QUERY_USER_BY_ID_SQL, params, new UserMapper());
+		List<User> users = jdbcTemplate.query(QUERY_USER_BY_ID_SQL, params, new UserMapper());
+		User user = null;
+		if (users.size() == 0) {
+			return null;
+		}
+		user = users.get(0);
+
 		List<Group> groups = jdbcTemplate.query(QUERY_GROUPS_BY_USERID, params, new GroupMapper());
 		List<Authority> authorities = jdbcTemplate.query(QUERY_AUTHORITIES_BY_USERID, params, new AuthorityMapper());
 
@@ -40,14 +50,10 @@ public class UserRepository {
 	}
 
 	public User getUser(String username) {
-		User dbUser = jdbcTemplate.queryForObject("select * from security_user where username = ? ",
+		List<User> users = jdbcTemplate.query("select * from security_user where username = ?",
 				new Object[] { username }, new UserMapper());
 
-		if (dbUser != null) {
-			return getUser(dbUser.getId());
-		}
-
-		return null;
+		return users.size() == 0 ? null : users.get(0);
 	}
 
 	public List<User> getUsers() {
@@ -73,5 +79,33 @@ public class UserRepository {
 
 	public void updatePassword(String username, String password) {
 		jdbcTemplate.update(UPDATE_PASSWORD_SQL, new Object[] { password, username });
+	}
+
+	public void addUser(final User user) {
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(
+						"insert into security_user(username, password, email, enabled) values(?, ?, ?, ?)",
+						new String[] { "id" });
+				ps.setString(1, user.getUsername());
+				ps.setString(2, user.getPassword());
+				ps.setString(3, user.getEmail());
+				ps.setBoolean(4, user.isEnabled());
+				return ps;
+			}
+		}, keyHolder);
+		user.setId(keyHolder.getKey().longValue());
+
+		for (Group group : user.getGroups()) {
+			jdbcTemplate.update("insert into security_group_users(group_id, user_id) values(?, ?)", new Object[] {
+					group.getId(), user.getId() });
+		}
+		for (Authority authority : user.getAuthorities()) {
+			jdbcTemplate.update("insert into security_user_authorities(user_id, authority_id) values(?, ?)",
+					new Object[] { user.getId(), authority.getId() });
+		}
 	}
 }

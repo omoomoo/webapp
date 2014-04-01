@@ -31,6 +31,7 @@ import com.demo.webapp.service.AuthorityService;
 import com.demo.webapp.service.GroupService;
 import com.demo.webapp.service.UserService;
 import com.demo.webapp.service.exception.PasswordIncorrectException;
+import com.demo.webapp.service.exception.UsernameAlreadyExistsException;
 
 @Controller
 @RequestMapping(value = { "/security" })
@@ -44,17 +45,34 @@ public class UserController {
 	private AuthorityService authorityService;
 
 	@RequestMapping(value = "/user", method = { RequestMethod.GET })
-	public void getUserPage(Model model) {
+	public void getUserPage(@ModelAttribute("user") User user, Model model) {
 		model.addAttribute("groups", groupService.getGroups());
 		model.addAttribute("authorities", authorityService.getAuthorities());
 	}
 
 	@RequestMapping(value = "/user", method = { RequestMethod.POST })
-	public void addUser(@Validated(value = UserAdd.class) User user, HttpServletRequest request, Model model) {
+	public String addUser(@Validated(value = UserAdd.class) @ModelAttribute("user") User user,
+			BindingResult bindingResult, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		logger.debug("add User with : {}", user);
-
 		renderUser(user, request);
-		userService.addUser(user);
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("groups", groupService.getGroups());
+			model.addAttribute("authorities", authorityService.getAuthorities());
+			return null;
+		}
+
+		try {
+			userService.addUser(user);
+		} catch (UsernameAlreadyExistsException e) {
+			model.addAttribute("groups", groupService.getGroups());
+			model.addAttribute("authorities", authorityService.getAuthorities());
+			model.addAttribute("error", "您添加的用户名已经存在！");
+			return null;
+		}
+
+		redirectAttributes.addFlashAttribute("success", "添加用户成功！");
+
+		return "redirect:/security/user/" + user.getId();
 	}
 
 	@RequestMapping(value = "/users", method = { RequestMethod.GET })

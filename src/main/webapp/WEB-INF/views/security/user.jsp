@@ -12,9 +12,11 @@
 	<div class="container-fluid">
 		<c:url var="action" value="/security/user" />
 		<c:set var="method" value="POST" />
-		<c:if test="${user ne null }">
+		<c:set var="readonly" value="false" />
+		<c:if test="${user.id != 0 }">
 			<c:url var="action" value="" />
 			<c:set var="method" value="PUT" />
+			<c:set var="readonly" value="true" />
 		</c:if>
 		<form:form action="${action }" method="${method }" cssClass="form-horizontal" modelAttribute="user">
 			<div class="row-fluid">
@@ -28,7 +30,7 @@
 							<div class="control-group">
 								<label class="control-label"> 用户名 :</label>
 								<div class="controls">
-									<form:input path="username" cssClass="span11" placeholder="用户名" readonly="true" />
+									<form:input path="username" cssClass="span11" placeholder="用户名" readonly="${readonly }" />
 								</div>
 							</div>
 							<div class="control-group">
@@ -126,6 +128,11 @@
 								<c:if test="${success != null}">
 									<div class="alert alert-success alert-block">
 										<a class="close" data-dismiss="alert" href="#">×</a> <span>${success }</span>
+									</div>
+								</c:if>
+								<c:if test="${error != null}">
+									<div class="alert alert-error alert-block">
+										<a class="close" data-dismiss="alert" href="#">×</a> <span>${error }</span>
 									</div>
 								</c:if>
 								<button type="submit" class="btn btn-success">全部更新</button>
