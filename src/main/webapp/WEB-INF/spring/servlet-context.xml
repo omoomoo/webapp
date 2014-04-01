@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- Spring MVC 注释功能 -->
-	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
+	<mvc:annotation-driven
+		content-negotiation-manager="contentNegotiationManager" />
 
 	<!-- 静态资源不需要拦截过滤 -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
@@ -15,7 +17,8 @@
 	<context:component-scan base-package="com.demo.webapp.web" />
 
 	<!-- 内部资源视图解析器 -->
-	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="internalResourceViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="100" />
 		<property name="contentType" value="text/html" />
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -23,11 +26,13 @@
 	</bean>
 
 	<!-- 内容协商视图姐解析器 -->
-	<bean id="contentNegotiatingViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	<bean id="contentNegotiatingViewResolver"
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="order" value="0" />
 		<property name="defaultViews">
 			<list>
-				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
 					<property name="marshaller">
 						<bean class="org.springframework.oxm.xstream.XStreamMarshaller" />
@@ -36,7 +41,8 @@
 			</list>
 		</property>
 		<property name="contentNegotiationManager">
-			<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+			<bean id="contentNegotiationManager"
+				class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 				<property name="ignoreAcceptHeader" value="true" />
 				<property name="favorPathExtension" value="false" />
 				<property name="favorParameter" value="true" />
@@ -53,7 +59,8 @@
 		</property>
 	</bean>
 	<!-- 内容协商管理 -->
-	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<property name="ignoreAcceptHeader" value="true" />
 		<property name="favorPathExtension" value="false" />
 		<property name="favorParameter" value="true" />
@@ -69,9 +76,8 @@
 	</bean>
 
 	<!-- 文件上传配置 -->
-	<bean id="portletMultipartResolver" class="org.springframework.web.portlet.multipart.CommonsPortletMultipartResolver">
-		<property name="maxUploadSize" value="-1" />
-		<property name="defaultEncoding" value="UTF-8" />
-		<property name="maxInMemorySize" value="10240" />
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000" />
 	</bean>
 </beans>
