@@ -68,4 +68,10 @@
 		</property>
 	</bean>
 
+	<!-- 文件上传配置 -->
+	<bean id="portletMultipartResolver" class="org.springframework.web.portlet.multipart.CommonsPortletMultipartResolver">
+		<property name="maxUploadSize" value="-1" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxInMemorySize" value="10240" />
+	</bean>
 </beans>
