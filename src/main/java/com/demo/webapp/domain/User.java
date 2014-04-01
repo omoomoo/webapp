@@ -44,7 +44,7 @@ public class User {
 	@Column
 	@Email(message = "邮箱格式不合法！", groups = { UserAdd.class, UserUpdate.class, UserPersonalUpdate.class, })
 	private String email;
-	@ManyToMany(mappedBy = "users", cascade = { CascadeType.REFRESH })
+	@ManyToMany(mappedBy = "users", cascade = { CascadeType.REMOVE })
 	private List<Group> groups = new ArrayList<Group>();
 	@ManyToMany
 	@JoinTable(name = "security_user_authorities", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))

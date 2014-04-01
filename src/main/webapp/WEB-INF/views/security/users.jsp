@@ -28,7 +28,7 @@
 						<div class="widget-title">
 							<span class="icon"><i class="icon-th"></i></span>
 							<h5>用户列表</h5>
-							<span class="btn icon-plus-sign add-user-trigger" style="float:right;margin-top:7px; margin-right:8px;">添加用户</span>
+							<span class="btn icon-plus-sign add-user-trigger" style="float: right; margin-top: 7px; margin-right: 8px;">添加用户</span>
 						</div>
 						<div class="widget-content nopadding">
 							<table class="table table-bordered users-table">
@@ -53,7 +53,8 @@
 													<c:when test="${user.enabled}">启用</c:when>
 													<c:otherwise>禁用</c:otherwise>
 												</c:choose></td>
-											<td><span class="query-user-trigger" data-user-url="<c:url value="/security/user/${user.id }" />">修改信息</span></td>
+											<td><span class="query-user-trigger" data-user-url="<c:url value="/security/user/${user.id }" />">修改信息</span> <span
+												class="delete-user-trigger" data-user-url="<c:url value="/security/user/${user.id }" />">删除</span></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -79,14 +80,32 @@
 			'aaSorting' : [ [ 2, "desc" ] ],
 		});
 		$('select').select2();
-		
-		$('.query-user-trigger').click(function(){
+
+		$('.query-user-trigger').click(function() {
 			var url = $(this).attr('data-user-url');
 			window.openWindow(url, '用户信息');
 		});
-		
-		$('.add-user-trigger').click(function(){
+
+		$('.add-user-trigger').click(function() {
 			window.openWindow('<c:url value="/security/user"/>', '用户信息');
+		});
+
+		$('.delete-user-trigger').click(function() {
+			var url = $(this).attr('data-user-url');
+
+			if (!window.confirm('你去要删除该用户吗 ?')) {
+				return;
+			}
+
+			$.post(url, {
+				'_format' : 'json',
+				'_method' : 'DELETE',
+				'${_csrf.parameterName}' : '${_csrf.token}',
+			}, function(data) {
+				window.alert(data.success || data.error);
+				window.location.reload();
+			});
+
 		});
 	</script>
 </body>

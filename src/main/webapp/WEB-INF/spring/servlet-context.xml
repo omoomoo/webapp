@@ -40,7 +40,7 @@
 				<property name="ignoreAcceptHeader" value="true" />
 				<property name="favorPathExtension" value="false" />
 				<property name="favorParameter" value="true" />
-				<property name="parameterName" value="format" />
+				<property name="parameterName" value="_format" />
 				<property name="defaultContentType" value="text/html;charset=UTF-8" />
 				<property name="mediaTypes">
 					<map>

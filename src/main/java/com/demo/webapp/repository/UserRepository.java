@@ -108,4 +108,12 @@ public class UserRepository {
 					new Object[] { user.getId(), authority.getId() });
 		}
 	}
+
+	public void deleteUser(long id) {
+		Object[] params = new Object[] { id };
+
+		jdbcTemplate.update("delete from security_user_authorities where user_id = ?", params);
+		jdbcTemplate.update("delete from security_group_users where user_id = ?", params);
+		jdbcTemplate.update("delete from security_user where id = ? ", params);
+	}
 }

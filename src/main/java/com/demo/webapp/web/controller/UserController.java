@@ -71,7 +71,6 @@ public class UserController {
 		}
 
 		redirectAttributes.addFlashAttribute("success", "添加用户成功！");
-
 		return "redirect:/security/user/" + user.getId();
 	}
 
@@ -107,6 +106,13 @@ public class UserController {
 		redirect.addFlashAttribute("success", "更新用户信息成功！");
 
 		return "redirect:/security/user/{id}";
+	}
+
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+	public String deleteUser(@PathVariable("id") long id, Model model) {
+		userService.deleteUser(id);
+		model.addAttribute("success", "删除用户成功！");
+		return "security/user";
 	}
 
 	/**
