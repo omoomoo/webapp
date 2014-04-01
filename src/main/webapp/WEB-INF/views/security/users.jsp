@@ -11,7 +11,6 @@
 <body>
 	<%@ include file="/WEB-INF/views/includes/header.jspf"%>
 	<%@ include file="/WEB-INF/views/includes/sub_nav.jspf"%>
-
 	<div id="content">
 		<!-- 书签导航 -->
 		<div id="content-header">

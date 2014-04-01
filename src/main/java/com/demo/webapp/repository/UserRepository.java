@@ -53,7 +53,12 @@ public class UserRepository {
 		List<User> users = jdbcTemplate.query("select * from security_user where username = ?",
 				new Object[] { username }, new UserMapper());
 
-		return users.size() == 0 ? null : users.get(0);
+		User user = users.size() == 0 ? null : users.get(0);
+		if (user != null) {
+			user = getUser(user.getId());
+		}
+
+		return user;
 	}
 
 	public List<User> getUsers() {
