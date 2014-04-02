@@ -42,8 +42,8 @@
 										<td><c:out value="${group.id }" /></td>
 										<td><c:out value="${group.name }" /></td>
 										<td><c:out value="${group.name }" />-说明</td>
-										<td><span class="query-group-trigger" data-user-url="<c:url value="/security/group/${group.id }" />">修改信息</span> &nbsp;&nbsp; <span
-											class="delete-group-trigger" data-user-url="<c:url value="/security/group/${group.id }" />">删除</span></td>
+										<td><a class="query-group-trigger" href='<c:url value="/security/group/${group.id }" />'>修改信息</a>&nbsp;&nbsp; <a
+											class="delete-group-trigger" href='<c:url value="/security/group/${group.id }" />'>删除</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -67,19 +67,23 @@
 			});
 			$('select').select2();
 
-			$('.query-group-trigger').click(function() {
-				var url = $(this).attr('data-user-url') + '?_decorator=none';
+			$('.query-group-trigger').click(function(e) {
+				e.preventDefault();
+
+				var url = $(this).attr('href') + '?_decorator=none';
 				window.openWindow(url, '权限组信息');
 			});
 
-			$('.add-group-trigger').click(function() {
+			$('.add-group-trigger').click(function(e) {
+				e.preventDefault();
 				window.openWindow('<c:url value="/security/group"/>_decorator=none', '权限组信息');
 			});
 
 			//TODO 重复代码
-			$('.delete-group-trigger').click(function() {
-				var url = $(this).attr('data-user-url') + '_decorator=none';
+			$('.delete-group-trigger').click(function(e) {
+				e.preventDefault();
 
+				var url = $(this).attr('href') + '_decorator=none';
 				if (!window.confirm('你去要删除该用户吗 ?')) {
 					return;
 				}

@@ -42,7 +42,7 @@
 										<td><c:out value="${authority.id }" /></td>
 										<td><c:out value="${authority.name }" /></td>
 										<td><c:out value="${authority.name }" />-说明</td>
-										<td><span class="query-authority-trigger">修改信息</span>&nbsp;&nbsp;<span class="delete-authority-trigger">删除</span></td>
+										<td><a class="query-authority-trigger">修改信息</a>&nbsp;&nbsp;<a class="delete-authority-trigger">删除</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

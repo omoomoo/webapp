@@ -48,8 +48,9 @@
 												<c:when test="${user.enabled}">启用</c:when>
 												<c:otherwise>禁用</c:otherwise>
 											</c:choose></td>
-										<td><span class="query-user-trigger" data-user-url="<c:url value="/security/user/${user.id }" />">修改信息</span> <span
-											class="delete-user-trigger" data-user-url="<c:url value="/security/user/${user.id }" />">删除</span></td>
+										<td>
+										<a class="query-user-trigger" href="<c:url value="/security/user/${user.id }" />">修改信息</a> 
+										<a class="delete-user-trigger" href="<c:url value="/security/user/${user.id }" />">删除</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -71,19 +72,23 @@
 			});
 			$('select').select2();
 
-			$('.query-user-trigger').click(function() {
-				var url = $(this).attr('data-user-url') + '?_decorator=none';
+			$('.query-user-trigger').click(function(e) {
+				e.preventDefault();
+				
+				var url = $(this).attr('href') + '?_decorator=none';
 				window.openWindow(url, '用户信息');
 			});
 
-			$('.add-user-trigger').click(function() {
+			$('.add-user-trigger').click(function(e) {
+				e.preventDefault();
 				window.openWindow('<c:url value="/security/user"/>?_decorator=none', '用户信息');
 			});
 
 			//TODO 重复代码
-			$('.delete-user-trigger').click(function() {
-				var url = $(this).attr('data-user-url') + '?_decorator=none';
-
+			$('.delete-user-trigger').click(function(e) {
+				e.preventDefault(); // TODO 兼容问题，重复代码 
+				
+				var url = $(this).attr('href') + '?_decorator=none';
 				if (!window.confirm('你去要删除该用户吗 ?')) {
 					return;
 				}
