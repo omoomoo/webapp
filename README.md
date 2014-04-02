@@ -14,6 +14,8 @@ webapp
  * UEditor
  * jQuery template
  * websocket
+ * HTML5 Feature
+ * responsible design
 
 ##views
  
