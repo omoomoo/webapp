@@ -11,11 +11,9 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<c:url var="action" value="/security/user" />
 		<c:set var="method" value="POST" />
 		<c:set var="readonly" value="false" />
 		<c:if test="${user.id != 0 }">
-			<c:url var="action" value="" />
 			<c:set var="method" value="PUT" />
 			<c:set var="readonly" value="true" />
 		</c:if>

@@ -76,14 +76,14 @@
 
 			$('.add-group-trigger').click(function(e) {
 				e.preventDefault();
-				window.openWindow('<c:url value="/security/group"/>_decorator=none', '权限组信息');
+				window.openWindow('<c:url value="/security/group"/>?_decorator=none', '权限组信息');
 			});
 
 			//TODO 重复代码
 			$('.delete-group-trigger').click(function(e) {
 				e.preventDefault();
 
-				var url = $(this).attr('href') + '_decorator=none';
+				var url = $(this).attr('href') + '?_decorator=none';
 				if (!window.confirm('你去要删除该用户吗 ?')) {
 					return;
 				}
