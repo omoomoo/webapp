@@ -11,4 +11,9 @@ public class LoginController {
 	public String loginPage() {
 		return "login";
 	}
+
+	@RequestMapping(value = "/security/overview", method = RequestMethod.GET)
+	public String overview() {
+		return "/security/overview";
+	}
 }

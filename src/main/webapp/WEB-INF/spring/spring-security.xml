@@ -16,7 +16,7 @@
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<!-- 登陆管理 -->
 		<form-login login-page="/login.html" login-processing-url="/login" username-parameter="username" password-parameter="password"
-			default-target-url="/overview" always-use-default-target="true" authentication-failure-url="/login.html?error" />
+			default-target-url="/security/overview" always-use-default-target="true" authentication-failure-url="/login.html?error" />
 		<!-- 登出管理 -->
 		<logout logout-url="/logout" logout-success-url="/login.html?logout" delete-cookies="JSESSIONID" invalidate-session="true" />
 		<!-- Header管理 -->

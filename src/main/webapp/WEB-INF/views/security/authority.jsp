@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="decorator" content="${param._decorator}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>个人信息</title>
+<title>权限</title>
 <%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>
 </head>
 <body>

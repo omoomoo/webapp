@@ -4,6 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="zh_CN">
 <decorator:head />
+<decorator:title />
 <body>
 	<decorator:body />
 	<%@ include file="/WEB-INF/views/includes/footer.jspf"%>

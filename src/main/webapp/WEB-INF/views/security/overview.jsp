@@ -89,8 +89,9 @@
 	</div>
 	<script type="text/javascript">
 		window.onload = function() {
-			var url = '<c:url value="/main/overview/generalStatistics.json"/>';
+			var url = '<c:url value="/security/overview/generalStatistics.json"/>';
 			$.get(url, {}, function(data) {
+			
 			});
 		};
 	</script>

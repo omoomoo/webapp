@@ -10,13 +10,11 @@
 <%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>
 </head>
 <body>
-	<!-- 书签导航 -->
 	<div id="content-header">
 		<div id="breadcrumb">
 			<a href="#" title="个人信息" class="tip-bottom"><i class="icon-home"></i>个人中心</a>
 		</div>
 	</div>
-	<!-- 详细信息   -->
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span12">
