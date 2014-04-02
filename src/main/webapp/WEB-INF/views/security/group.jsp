@@ -4,6 +4,7 @@
 <html lang="zh_CN">
 <head>
 <meta charset="UTF-8">
+<meta name="decorator" content="${param._decorator}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>权限组信息</title>
 <%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>
@@ -30,7 +31,7 @@
 							<div class="control-group">
 								<label class="control-label">权限组 :</label>
 								<div class="controls">
-									<form:input path="name" readonly="${readonly }" cssClass="span11" placeholder="权限组"/>
+									<form:input path="name" readonly="${readonly }" cssClass="span11" placeholder="权限组" />
 								</div>
 							</div>
 							<div class="control-group">
@@ -115,7 +116,7 @@
 							</table>
 							<div class="form-actions">
 								<!-- TODO 重复代码 -->
-								<form:errors path="*" cssClass="alert alert-error alert-block" element="div"/>
+								<form:errors path="*" cssClass="alert alert-error alert-block" element="div" />
 								<c:if test="${success != null}">
 									<div class="alert alert-success alert-block">${success }</div>
 								</c:if>
@@ -129,21 +130,23 @@
 				</div>
 			</div>
 		</form:form>
-		<!-- 脚本  -->
-		<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
-		<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 		<script type="text/javascript">
-			$('.groups-table .authoritie-table').dataTable({
-				'bJQueryUI' : true,
-				'sPaginationType' : "full_numbers",
-				'sDom' : '<""l>t<"F"fp>',
-				'bSort' : true,
-				'bRetrieve' : true,
-				'aaSorting' : [ [ 2, "desc" ] ],
-			});
+			window.onload = function() {
+				$('.groups-table .authoritie-table').dataTable({
+					'bJQueryUI' : true,
+					'sPaginationType' : "full_numbers",
+					'sDom' : '<""l>t<"F"fp>',
+					'bSort' : true,
+					'bRetrieve' : true,
+					'aaSorting' : [ [ 2, "desc" ] ],
+				});
 
-			$('select').select2();
+				$('select').select2();
+
+			};
 		</script>
 	</div>
 </body>
+<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
+<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 </html>

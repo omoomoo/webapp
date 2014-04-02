@@ -39,7 +39,9 @@
 	<logger name="jdbc.resultsettable">
 		<level value="info" />
 	</logger>
-
+	<logger name="org.sitemesh">
+		<level value="debug" />
+	</logger>
 	<!-- 根日志 -->
 	<root>
 		<priority value="warn" />

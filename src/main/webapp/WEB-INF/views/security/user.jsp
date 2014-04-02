@@ -4,11 +4,17 @@
 <html lang="zh_CN">
 <head>
 <meta charset="UTF-8">
+<meta name="decorator" content="${param._decorator}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>个人信息</title>
 <%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>
 </head>
 <body>
+	<div id="content-header">
+		<div id="breadcrumb">
+			<a href="#" title="个人信息" class="tip-bottom"><i class="icon-home"></i>个人中心</a>
+		</div>
+	</div>
 	<div class="container-fluid">
 		<c:url var="action" value="/security/user" />
 		<c:set var="method" value="POST" />
@@ -124,7 +130,7 @@
 								</c:forEach>
 							</table>
 							<div class="form-actions">
-								<form:errors path="*" cssClass="alert alert-error alert-block" element="div"/>
+								<form:errors path="*" cssClass="alert alert-error alert-block" element="div" />
 								<c:if test="${success != null}">
 									<div class="alert alert-success alert-block">
 										<a class="close" data-dismiss="alert" href="#">×</a> <span>${success }</span>
@@ -142,10 +148,9 @@
 				</div>
 			</div>
 		</form:form>
-		<!-- 脚本  -->
-		<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
-		<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
-		<script type="text/javascript">
+	</div>
+	<script type="text/javascript">
+		window.onload = function() {
 			$('.groups-table .authoritie-table').dataTable({
 				'bJQueryUI' : true,
 				'sPaginationType' : "full_numbers",
@@ -156,7 +161,9 @@
 			});
 
 			$('select').select2();
-		</script>
-	</div>
+		};
+	</script>
 </body>
+<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
+<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 </html>
