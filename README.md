@@ -13,6 +13,7 @@ webapp
  * hight chart
  * UEditor
  * jQuery template
+ * websocket
 
 ##views
  
