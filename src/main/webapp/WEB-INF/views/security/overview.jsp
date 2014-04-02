@@ -93,6 +93,7 @@
 			$.get(url, {}, function(data) {
 			
 			});
+			$.post('http://localhost:8080/webapp/security/user?_format=json&_csrf=1c1786e2-489f-40ee-9259-c8b79a4c9a96',{username:'dd',password:'dfdf'},function(data){console.log(data);});
 		};
 	</script>
 </body>

@@ -21,7 +21,7 @@
 		<logout logout-url="/logout" logout-success-url="/login.html?logout" delete-cookies="JSESSIONID" invalidate-session="true" />
 		<!-- Header管理 -->
 		<headers>
-			<cache-control />
+			<cache-control /> <!-- XSS -->
 			<content-type-options />
 			<frame-options />
 			<xss-protection />

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,9 +46,11 @@ public class UserController {
 	private AuthorityService authorityService;
 
 	@RequestMapping(value = "/user", method = { RequestMethod.GET })
-	public void getUserPage(@ModelAttribute("user") User user, Model model) {
+	public String getUserPage(@ModelAttribute("user") User user, Model model) {
 		model.addAttribute("groups", groupService.getGroups());
 		model.addAttribute("authorities", authorityService.getAuthorities());
+		
+		return "security/user";
 	}
 
 	@RequestMapping(value = "/user", method = { RequestMethod.POST })
