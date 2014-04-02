@@ -38,7 +38,7 @@ webapp
  * Spring JDBC
  * Mybatis
  * Hibernate
- * Spring Data
+ * Spring Data【MongoDB】
 
 #domain
  
