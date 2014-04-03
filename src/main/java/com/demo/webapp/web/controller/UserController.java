@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.webapp.domain.Authority;
@@ -49,7 +49,7 @@ public class UserController {
 	public String getUserPage(@ModelAttribute("user") User user, Model model) {
 		model.addAttribute("groups", groupService.getGroups());
 		model.addAttribute("authorities", authorityService.getAuthorities());
-		
+
 		return "security/user";
 	}
 
@@ -111,11 +111,16 @@ public class UserController {
 		return "redirect:/security/user/{id}";
 	}
 
+	// TODO 使用内容协商视图解析器是否更优？
+	@ResponseBody
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-	public String deleteUser(@PathVariable("id") long id, Model model) {
+	public Object deleteUser(@PathVariable("id") long id) {
 		userService.deleteUser(id);
-		model.addAttribute("success", "删除用户成功！");
-		return "security/user";
+
+		Map<String, String> rs = new HashMap<String, String>();
+		rs.put("success", "删除用户成功！");
+		
+		return rs;
 	}
 
 	/**

@@ -1,7 +1,9 @@
 package com.demo.webapp.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.webapp.domain.Authority;
@@ -105,11 +108,14 @@ public class GroupController {
 		return "redirect:/security/group/{id}";
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "/group/{id}", method = RequestMethod.DELETE)
-	public String deleteGroup(@PathVariable("id") long id, Model model) {
+	public Object deleteGroup(@PathVariable("id") long id) {
 		groupService.deleteGroup(id);
-		model.addAttribute("success", "删除权限组操作成功！");
-		return "security/group";
+
+		Map<String, String> rs = new HashMap<String, String>();
+		rs.put("success", "删除权限组操作成功！");
+		return rs;
 	}
 
 	private void renderGroup(Group group, HttpServletRequest request) {

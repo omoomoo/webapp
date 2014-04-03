@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- Spring MVC 注释功能 -->
-	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
+	<mvc:annotation-driven />
 
 	<!-- 静态资源不需要拦截过滤 -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
@@ -19,42 +19,11 @@
 	</mvc:interceptors>
 
 	<!-- 内部资源视图解析器 -->
-	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="100" />
 		<property name="contentType" value="text/html" />
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<!-- 内容协商视图姐解析器 -->
-	<bean id="contentNegotiatingViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="order" value="0" />
-		<property name="defaultViews">
-			<list>
-				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
-					<property name="marshaller">
-						<bean class="org.springframework.oxm.xstream.XStreamMarshaller" />
-					</property>
-				</bean>
-			</list>
-		</property>
-		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
-	</bean>
-	<!-- 内容协商管理 -->
-	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-		<property name="ignoreAcceptHeader" value="true" />
-		<property name="favorPathExtension" value="false" />
-		<property name="favorParameter" value="true" />
-		<property name="parameterName" value="_format" />
-		<property name="defaultContentType" value="text/html" />
-		<property name="mediaTypes">
-			<map>
-				<entry key="html" value="text/html" />
-				<entry key="xml" value="application/xml" />
-				<entry key="json" value="application/json" />
-			</map>
-		</property>
 	</bean>
 
 	<!-- 文件上传配置 -->

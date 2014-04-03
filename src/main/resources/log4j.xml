@@ -28,7 +28,7 @@
 
 	<!-- 第三方日志 -->
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.jdbc">
 		<level value="debug" />
@@ -40,7 +40,7 @@
 		<level value="info" />
 	</logger>
 	<logger name="org.sitemesh">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	<!-- 根日志 -->
 	<root>
