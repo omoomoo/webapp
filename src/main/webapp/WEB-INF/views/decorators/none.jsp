@@ -3,11 +3,18 @@
 <%@ include file="/WEB-INF/views/includes/taglibs.jspf"%>
 <!DOCTYPE HTML>
 <html lang="zh_CN">
+<title><decorator:title /></title>
 <decorator:head />
-<decorator:title />
+<style>
+body {
+	background-color: rgb(238, 238, 238);
+}
+#content-header {
+	margin-top: 9px;
+}
+</style>
 <body>
 	<decorator:body />
-	<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
 	<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 </body>
 </html>

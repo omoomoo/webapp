@@ -4,7 +4,7 @@
 <html lang="zh_CN">
 <head>
 <meta charset="UTF-8">
-<meta name="decorator" content="default" />
+<meta name="decorator" content="${param._decorator}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SDK Analytics2.0</title>
 <%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>

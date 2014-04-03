@@ -6,6 +6,9 @@
 	<decorator name="none" page="none.jsp">
 		<pattern>/security/*</pattern>
 	</decorator>
+	<decorator name="iframe" page="iframe.jsp">
+		<pattern>/security/*</pattern>
+	</decorator>
 	<decorator name="default" page="default.jsp">
 		<pattern>/security/*</pattern>
 	</decorator>

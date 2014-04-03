@@ -24,7 +24,7 @@
 		<headers>
 			<cache-control /> <!-- XSS -->
 			<content-type-options />
-			<frame-options />
+			<frame-options policy="SAMEORIGIN"/>
 			<xss-protection />
 		</headers>
 		<!-- Session策略 -->

@@ -10,6 +10,11 @@
 <%@ include file="/WEB-INF/views/includes/head_scripts_links.jspf"%>
 </head>
 <body>
+	<div id="content-header">
+		<div id="breadcrumb">
+			<a href="#" title="用户列表" class="tip-bottom"><i class="icon-home"></i>用户信息</a>
+		</div>
+	</div>
 	<div class="container-fluid">
 		<c:set var="method" value="POST" />
 		<c:set var="readonly" value="false" />
