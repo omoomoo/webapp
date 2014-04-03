@@ -22,12 +22,15 @@ public class DecoratorRedirectorInterceptor implements HandlerInterceptor {
 			String decorator = request.getParameter("_decorator");
 
 			// TODO anything else to do?
-			// TODO 需要判断重定向里面是否包含参数
 			if (viewName.startsWith("redirect:") && decorator != null) {
-				modelAndView.setViewName(viewName + "?_decorator=" + decorator);
-			}
+				if (viewName.contains("?")) {
+					viewName = viewName + "&_decorator=" + decorator;
+				} else {
+					viewName = viewName + "?_decorator=" + decorator;
+				}
 
-			System.out.println("***************view name:" + modelAndView.getViewName());
+				modelAndView.setViewName(viewName);
+			}
 		}
 	}
 

@@ -2,6 +2,4 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<!-- 导入配置资源 -->
-	<import resource="servlet-security.xml" />
 </beans>

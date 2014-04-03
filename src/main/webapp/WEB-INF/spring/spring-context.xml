@@ -43,7 +43,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!-- 初始化数据库数据 -->
-	<jdbc:initialize-database data-source="dataSource" enabled="false" ignore-failures="ALL">
+	<jdbc:initialize-database data-source="dataSource" enabled="true" ignore-failures="ALL">
 		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_schema.sql" />
 		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_user.sql" />
 		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_group.sql" />

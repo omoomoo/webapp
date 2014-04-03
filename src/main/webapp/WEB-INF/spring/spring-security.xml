@@ -9,6 +9,7 @@
 
 	<!-- 不需要Security保护的资源 -->
 	<http pattern="/resources/**" security="none" />
+	<http pattern="/resources2/**" security="none" />
 
 	<!-- 需要Security保护的资源 -->
 	<http>

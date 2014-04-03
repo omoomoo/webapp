@@ -39,29 +39,14 @@
 				</bean>
 			</list>
 		</property>
-		<property name="contentNegotiationManager">
-			<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-				<property name="ignoreAcceptHeader" value="true" />
-				<property name="favorPathExtension" value="false" />
-				<property name="favorParameter" value="true" />
-				<property name="parameterName" value="_format" />
-				<property name="defaultContentType" value="text/html;charset=UTF-8" />
-				<property name="mediaTypes">
-					<map>
-						<entry key="html" value="text/html; charset=UTF-8" />
-						<entry key="xml" value="application/xml; charset=UTF-8" />
-						<entry key="json" value="application/json; charset=UTF-8" />
-					</map>
-				</property>
-			</bean>
-		</property>
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
 	</bean>
 	<!-- 内容协商管理 -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<property name="ignoreAcceptHeader" value="true" />
 		<property name="favorPathExtension" value="false" />
 		<property name="favorParameter" value="true" />
-		<property name="parameterName" value="format" />
+		<property name="parameterName" value="_format" />
 		<property name="defaultContentType" value="text/html" />
 		<property name="mediaTypes">
 			<map>
