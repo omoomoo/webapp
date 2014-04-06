@@ -12,8 +12,8 @@
 <body>
 	<%@ include file="/WEB-INF/views/includes/header.jspf"%>
 	<%@ include file="/WEB-INF/views/includes/sub_nav.jspf"%>
-	<div id="content" style="overflow: hidden">
-		<iframe id="iframe" name="iframe" frameborder="0" style="overflow: hidden; height: 100%; width: 100%" height="100%"
+	<div id="content" style="margin-top: -38px; overflow: hidden">
+		<iframe id="iframe" name="iframe" frameborder="0" style="overflow: hidden; height: 100%; width: 100%" ; height="100%"
 			width="100%" onload='javascript:resizeIframe(this);'> </iframe>
 	</div>
 	<%@ include file="/WEB-INF/views/includes/footer.jspf"%>

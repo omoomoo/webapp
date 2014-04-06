@@ -7,6 +7,7 @@ import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(value = "/fileupload")
 public class FileUploadController {
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+	@Value(value = "basepath")
+	private static String basepath;
+	@Value(value = "baseurl")
+	private static String pathurl;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String getFileUploadPage() {
@@ -38,9 +43,8 @@ public class FileUploadController {
 		redirectAttributes.addFlashAttribute("fileSize", file.getSize());
 
 		try {
-			FileUtils.writeByteArrayToFile(new File("C:\\ab"), file.getBytes());
+			FileUtils.writeByteArrayToFile(new File(basepath + file.getOriginalFilename()), file.getBytes());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
