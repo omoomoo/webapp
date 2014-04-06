@@ -20,6 +20,24 @@
 						</div>
 						<div class="widget-content no-padding">
 							<div class="control-group">
+								<label class="control-label">文件名 :</label>
+								<div class="controls">
+									${originalFileName }
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">文件大小 :</label>
+								<div class="controls">
+									${fileSize }
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Content-Type :</label>
+								<div class="controls">
+									${contentType }
+								</div>
+							</div>
+							<div class="control-group">
 								<label class="control-label">选择文件 :</label>
 								<div class="controls">
 									<input name="file" type="file" value="" placeholder="选择文件"/>
@@ -44,9 +62,7 @@
 				</div>
 			</div>
 		</form>
-		<!-- 脚本  -->
-		<%@ include file="/WEB-INF/views/includes/footer.jspf"%>
-		<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 	</div>
 </body>
+<%@ include file="/WEB-INF/views/includes/foot_scripts_links.jspf"%>
 </html>

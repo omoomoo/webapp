@@ -13,6 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.demo.webapp.domain.validator.UserValidator;
+
 @Entity
 @Table(name = "security_group")
 public class Group {

@@ -13,7 +13,7 @@
 		</li>
 		<li class="submenu"><a href="#"><i class="icon icon-trophy"></i> <span>文件管理</span> <span class="label label-important">3</span></a>
 			<ul id="sales-submenu">
-				<li><a href="<c:url value="/fileupload/"/>">上传文件</a></li>
+				<li><a href="<c:url value="/fileupload/upload"/>">上传文件</a></li>
 				<li><a href="<c:url value="/security/authorities"/>">文件列表</a></li>
 			</ul>
 		</li>
