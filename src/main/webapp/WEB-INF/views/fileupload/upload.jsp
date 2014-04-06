@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<form action="upload?${_csrf.parameterName}=${_csrf.token}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+		<form action="?${_csrf.parameterName}=${_csrf.token}&_decorator=${param._decorator}" method="POST" class="form-horizontal" enctype="multipart/form-data">
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="widget-box">
