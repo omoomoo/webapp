@@ -1,41 +1,66 @@
 package com.demo.webapp.web.fontend;
 
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
-
 import junit.framework.Assert;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class LoginTest {
-	@Before
-	public void t(){
-		
+	private static WebDriver browser;
+
+	@BeforeClass
+	public static void beforeClass() {
+		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
+		browser = new ChromeDriver();
 	}
-	
-	@After
-	public void d(){
-		
-	}
-	
-	@Test
-	public void t01_estDf() {
-		Assert.assertEquals(false, false);
+
+	@AfterClass
+	public static void afterClass() {
+		// browser.close();
 	}
 
 	@Test
-	public void t02_estDf() {
-		Assert.assertEquals(true, true);
+	public void t01_login_error() {
+		browser.get("http://localhost:8080/webapp/login.html");
+
+		browser.findElement(By.id("username")).sendKeys("1");
+		browser.findElement(By.id("password")).sendKeys("2");
+		browser.findElement(By.id("loginForm")).submit();
+
+		String url = browser.getCurrentUrl();
+		Assert.assertEquals("http://localhost:8080/webapp/login.html?error", url);
 	}
-	
+
+	@Test
+	public void t02_login_success() {
+		browser.get("http://localhost:8080/webapp/login.html");
+
+		browser.findElement(By.id("username")).sendKeys("1");
+		browser.findElement(By.id("password")).sendKeys("1");
+		browser.findElement(By.id("loginForm")).submit();
+
+		String url = browser.getCurrentUrl();
+		Assert.assertEquals("http://localhost:8080/webapp/security/overview", url);
+	}
+
+	@Test
+	public void t03_addUser() {
+		browser.get("http://localhost:8080/webapp/security/users");
+
+		browser.findElement(By.className("add-user-trigger")).click();
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
