@@ -7,17 +7,12 @@
 <script src="<c:url value="/resources/extjs/ext-all.js"/>" type="text/javascript"></script>
 <script>
 	Ext.onReady(function() {
-		Ext.create('Ext.Panel', {
-			title : 'Hello World Panel',
-			items : [ Ext.create('Ext.form.field.Text', {
-				fieldLabel : "Name",
-				id : 'nametext'
-			}), Ext.create('Ext.Button', {
-				text : 'Cllick',
-				handler : function() {
-					Ext.Msg.alert(Ext.getCmp('nametext').getValue());
-				}
-			}) ],
+		Ext.create("Ext.panel.Panel", {
+			title : "Fit layout panel",
+			items : [ {
+				xtype : "textfield",
+				fieldLabel : "Email"
+			} ],
 			renderTo : Ext.getBody()
 		});
 	});
