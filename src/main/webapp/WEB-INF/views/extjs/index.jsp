@@ -7,18 +7,29 @@
 <script src="<c:url value="/resources/extjs/ext-all.js"/>" type="text/javascript"></script>
 <script>
 	Ext.onReady(function() {
-		Ext.create('Ext.Panel', {
-			title : 'Hello World Panel',
-			items : [ Ext.create('Ext.form.field.Text', {
-				fieldLabel : "Name",
-				id : 'nametext'
-			}), Ext.create('Ext.Button', {
-				text : 'Cllick',
-				handler : function() {
-					Ext.Msg.alert(Ext.getCmp('nametext').getValue());
-				}
-			}) ],
-			renderTo : Ext.getBody()
+		new Ext.Viewport({
+			title : 'Viewport',
+			layout : 'border',
+			defaults : {
+				bodyStyle : 'background-color: #FFFFFF;',
+				frame : true
+			},
+			items : [ {
+				region : 'west',
+				title : ' 侧边导航',
+				width : 200,
+				collapsible : true
+			}, {
+				region : 'north',
+				html:'<h2>权限管理系统</h1>',
+				height : 60,
+				border: false
+			}, {
+				region : 'center',
+				title : '主体内容',
+				split : true,
+				border : true
+			} ]
 		});
 	});
 </script>
