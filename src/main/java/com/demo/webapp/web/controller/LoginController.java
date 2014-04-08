@@ -21,4 +21,9 @@ public class LoginController {
 	public String extjs() {
 		return "/extjs/index";
 	}
+
+	@RequestMapping(value = "/extjs/test")
+	public String extjsTest() {
+		return "/extjs/test";
+	}
 }
