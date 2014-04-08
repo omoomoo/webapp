@@ -10,10 +10,6 @@
 		new Ext.Viewport({
 			title : 'Viewport',
 			layout : 'border',
-			defaults : {
-				bodyStyle : 'background-color: #FFFFFF;',
-				frame : true
-			},
 			items : [ {
 				region : 'west',
 				title : ' 侧边导航',
