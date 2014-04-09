@@ -99,7 +99,7 @@
 					title : 'Viewport',
 					layout : 'border',
 					defaults : {
-						
+
 					},
 					items : [ {
 						region : 'west',
@@ -111,7 +111,8 @@
 							xtype : 'treepanel',
 							border : false,
 							store : treeStore,
-							rootVisible : false
+							rootVisible : false,
+							flex : 1
 						}
 					}, {
 						region : 'north',
