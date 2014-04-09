@@ -1,5 +1,6 @@
 package com.demo.webapp.domain.validator;
 
-public class GroupAdd {
-
+public interface GroupAdd {
+	public interface aa {
+	}
 }

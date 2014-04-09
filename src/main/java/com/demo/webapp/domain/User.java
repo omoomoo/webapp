@@ -23,6 +23,7 @@ import com.demo.webapp.domain.validator.UserAdd;
 import com.demo.webapp.domain.validator.UserChangePassword;
 import com.demo.webapp.domain.validator.UserPersonalUpdate;
 import com.demo.webapp.domain.validator.UserUpdate;
+import com.demo.webapp.domain.validator.UserValidator;
 
 @Entity
 @Table(name = "security_user")
