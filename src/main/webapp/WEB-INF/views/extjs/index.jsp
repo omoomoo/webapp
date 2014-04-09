@@ -59,9 +59,48 @@
 					}
 				});
 
+				var contentTab = Ext.create('Ext.tab.Panel', {
+					activeTab : 0,
+					border : 0,
+					defaults : {
+						padding : '10',
+						margin : '20',
+						border : '0',
+						frame : true
+					},
+					items : [ {
+						title : 'Simple tab',
+						html : 'This is a simple tab.'
+					}, {
+						title : 'I am closable',
+						html : 'Please close when done reading.',
+						closable : true
+					}, {
+						title : 'Disabled tab',
+						itemId : 'disabledTab',
+						html : 'Peekaboo!',
+						closable : true
+					}, {
+						title : 'Simple tab',
+						html : 'This is a simple tab.'
+					}, {
+						title : 'I am closable',
+						html : 'Please close when done reading.',
+						closable : true
+					}, {
+						title : 'Disabled tab',
+						itemId : 'disabledTab',
+						html : 'Peekaboo!',
+						closable : true
+					} ]
+				});
+
 				new Ext.Viewport({
 					title : 'Viewport',
 					layout : 'border',
+					defaults : {
+						
+					},
 					items : [ {
 						region : 'west',
 						title : '侧边导航',
@@ -81,9 +120,9 @@
 						border : false
 					}, {
 						region : 'center',
-						title : '主体内容',
 						margin : '0 0 3 0',
-						split : true
+						split : true,
+						items : contentTab
 					} ]
 				});
 
