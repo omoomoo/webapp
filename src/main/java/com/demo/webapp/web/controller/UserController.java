@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -49,13 +50,13 @@ public class UserController {
 	public String getUserPage(@ModelAttribute("user") User user, Model model) {
 		model.addAttribute("groups", groupService.getGroups());
 		model.addAttribute("authorities", authorityService.getAuthorities());
-		
+
 		return "security/user";
 	}
 
 	@RequestMapping(value = "/user", method = { RequestMethod.POST })
-	public String addUser(@Validated(value = UserAdd.class) @ModelAttribute("user") User user,
-			BindingResult bindingResult, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	public String addUser(@Validated(value = UserAdd.class) @ModelAttribute("user") @RequestBody User user, BindingResult bindingResult, Model model,
+			HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		logger.debug("add User with : {}", user);
 		renderUser(user, request);
 		if (bindingResult.hasErrors()) {
@@ -92,9 +93,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/{id}", method = { RequestMethod.PUT })
-	public Object updateUser(@PathVariable("id") long id,
-			@Validated(value = UserUpdate.class) @ModelAttribute("user") User user, BindingResult bindingResult,
-			HttpServletRequest request, Model model, RedirectAttributes redirect) {
+	public Object updateUser(@PathVariable("id") long id, @Validated(value = UserUpdate.class) @ModelAttribute("user") User user,
+			BindingResult bindingResult, HttpServletRequest request, Model model, RedirectAttributes redirect) {
 		// TODO 如何绑定而不需要通过自定义的方法？
 		renderUser(user, request);
 		if (bindingResult.hasErrors()) {
@@ -133,8 +133,8 @@ public class UserController {
 	 * 修改个人信息页面
 	 */
 	@RequestMapping(value = "/personal", method = RequestMethod.PUT)
-	public String updatePersonalDetails(@Validated(value = UserPersonalUpdate.class) @ModelAttribute("user") User user,
-			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+	public String updatePersonalDetails(@Validated(value = UserPersonalUpdate.class) @ModelAttribute("user") User user, BindingResult bindingResult,
+			Model model, RedirectAttributes redirectAttributes) {
 
 		logger.debug("修改个人信息 : {}", user);
 
@@ -162,8 +162,8 @@ public class UserController {
 	 * 修改个人密码
 	 */
 	@RequestMapping(value = "/personal/password", method = RequestMethod.PUT)
-	public String changePassword(@Validated(value = { UserChangePassword.class }) @ModelAttribute("user") User user,
-			BindingResult bindingResult, String oldPassword, Model model, RedirectAttributes redirect) {
+	public String changePassword(@Validated(value = { UserChangePassword.class }) @ModelAttribute("user") User user, BindingResult bindingResult,
+			String oldPassword, Model model, RedirectAttributes redirect) {
 		if (bindingResult.hasErrors()) {
 			return "/security/password";
 		}
