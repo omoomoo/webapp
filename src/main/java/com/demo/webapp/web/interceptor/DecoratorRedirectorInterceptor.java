@@ -32,6 +32,8 @@ public class DecoratorRedirectorInterceptor implements HandlerInterceptor {
 				modelAndView.setViewName(viewName);
 			}
 		}
+		// TODO if restful(_format=json,_format=xml) than no redirect
+		
 	}
 
 	@Override
