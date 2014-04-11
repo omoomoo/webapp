@@ -11,4 +11,12 @@ public class GroupNameAlreadyExistsException extends Exception {
 		super(message);
 	}
 
+	public GroupNameAlreadyExistsException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public GroupNameAlreadyExistsException(Throwable cause) {
+		super(cause);
+	}
+
 }
