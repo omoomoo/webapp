@@ -39,7 +39,7 @@ public class User {
 			UserPersonalUpdate.class, UserChangePassword.class, })
 	private String password;
 	@Column
-	@Length(message="盐长度必须为32位十六进制字符串！",min = 32, max = 32)
+	@Length(message = "盐长度必须为32位十六进制字符串！", min = 32, max = 32)
 	private String salt;
 	@Column(nullable = false)
 	@NotNull(groups = { UserAdd.class, UserUpdate.class })
@@ -91,6 +91,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public List<Group> getGroups() {

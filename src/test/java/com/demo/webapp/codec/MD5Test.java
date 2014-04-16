@@ -1,6 +1,5 @@
 package com.demo.webapp.codec;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 

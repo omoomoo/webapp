@@ -33,12 +33,6 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">密码 :</label>
-								<div class="controls">
-									<input type="text" class="span11" placeholder="密码 " name="password" value="<c:out value="${user.password}"/>" />
-								</div>
-							</div>
-							<div class="control-group">
 								<label class="control-label">邮箱 :</label>
 								<div class="controls">
 									<input type="text" class="span11" placeholder="邮箱" name="email" value="<c:out value="${user.email}"/>" />

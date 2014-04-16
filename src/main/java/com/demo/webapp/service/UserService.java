@@ -1,15 +1,17 @@
 package com.demo.webapp.service;
 
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.webapp.domain.User;
+import com.demo.webapp.repository.SaltRepository;
 import com.demo.webapp.repository.UserRepository;
 import com.demo.webapp.service.exception.PasswordIncorrectException;
 import com.demo.webapp.service.exception.UsernameAlreadyExistsException;
@@ -18,6 +20,8 @@ import com.demo.webapp.service.exception.UsernameAlreadyExistsException;
 public class UserService {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private SaltRepository saltRepository;
 
 	public List<User> getUsers() {
 		return userRepository.getUsers();
@@ -33,10 +37,15 @@ public class UserService {
 			throw new UsernameAlreadyExistsException("用户名已经存在！");
 		}
 
+		String salt = randomSalt();
+		String password = encodePassword(user.getPassword(), salt);
+		user.setPassword(password);
+		user.setSalt(salt);
+
 		userRepository.addUser(user);
 	}
 
-	public void changePassword(String oldPassword, String newPassword) throws PasswordIncorrectException {
+	public void resetPassword(String oldPassword, String newPassword) throws PasswordIncorrectException {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = userDetails.getUsername();
 
@@ -44,11 +53,14 @@ public class UserService {
 			throw new PasswordIncorrectException("您输入的旧密码不正确，请重新输入！");
 		}
 
-		userRepository.updatePassword(username, newPassword);
+		String salt = randomSalt();
+		newPassword = encodePassword(newPassword, salt);
+		userRepository.updatePassword(username, newPassword, salt);
 	}
 
 	public boolean checkPassword(String username, String password) {
 		User user = this.getUser(username);
+		password = encodePassword(password, user.getSalt());
 
 		return user.getPassword().equals(password);
 	}
@@ -74,7 +86,6 @@ public class UserService {
 		User dbUser = getUser(username);
 
 		// Not all attributes can be changed
-		dbUser.setPassword(user.getPassword());
 		dbUser.setEmail(user.getEmail());
 
 		updateUser(dbUser);
@@ -86,6 +97,16 @@ public class UserService {
 
 	public void deleteUser(long id) {
 		userRepository.deleteUser(id);
+	}
+
+	private String randomSalt() {
+		String uuid = UUID.randomUUID().toString();
+		return DigestUtils.md5Hex(uuid);
+	}
+
+	private String encodePassword(String rawPassword, String salt) {
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		return encoder.encodePassword(rawPassword, salt);
 	}
 
 }

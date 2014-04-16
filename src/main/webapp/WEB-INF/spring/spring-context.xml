@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:c="http://www.springframework.org/schema/c"
-	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:util="http://www.springframework.org/schema/util" xmlns:security="http://www.springframework.org/schema/security"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:util="http://www.springframework.org/schema/util" xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
 		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
@@ -25,8 +22,7 @@
 	<context:property-placeholder location="WEB-INF/spring/application.properties" />
 
 	<!-- 数据源 -->
-	<bean id="dataSourceSpied" class="com.jolbox.bonecp.BoneCPDataSource"
-		destroy-method="close">
+	<bean id="dataSourceSpied" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driver}" />
 		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
 		<property name="username" value="${jdbc.username}" />
@@ -47,38 +43,29 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!-- 初始化数据库数据 -->
-	<jdbc:initialize-database data-source="dataSource"
-		enabled="true" ignore-failures="ALL">
-		<jdbc:script encoding="UTF-8"
-			location="/WEB-INF/classes/security_schema.sql" />
+	<jdbc:initialize-database data-source="dataSource" enabled="false" ignore-failures="ALL">
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_schema.sql" />
 		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_user.sql" />
-		<jdbc:script encoding="UTF-8"
-			location="/WEB-INF/classes/security_group.sql" />
-		<jdbc:script encoding="UTF-8"
-			location="/WEB-INF/classes/security_authority.sql" />
-		<jdbc:script encoding="UTF-8"
-			location="/WEB-INF/classes/security_group_authorities.sql" />
-		<jdbc:script encoding="UTF-8"
-			location="/WEB-INF/classes/security_group_users.sql" />
-		<jdbc:script encoding="UTF-8"
-			location="/WEB-INF/classes/security_user_authorities.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_group.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_authority.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_group_authorities.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_group_users.sql" />
+		<jdbc:script encoding="UTF-8" location="/WEB-INF/classes/security_user_authorities.sql" />
 	</jdbc:initialize-database>
 
 	<!-- JDBC事务 -->
-	<bean id="txManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<!-- SessionFactory -->
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.demo.webapp.domain" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">false</prop>
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">true</prop>
 			</props>
@@ -100,8 +87,7 @@
 
 	<!-- 事务AOP切点 -->
 	<aop:config>
-		<aop:pointcut id="serviceOperation"
-			expression="execution(* com.demo.webapp.service.*.*(..))" />
+		<aop:pointcut id="serviceOperation" expression="execution(* com.demo.webapp.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
 	</aop:config>
 

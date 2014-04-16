@@ -37,12 +37,14 @@
 									<form:input path="username" cssClass="span11" placeholder="用户名" readonly="${readonly }" />
 								</div>
 							</div>
+							<c:if test="${not readonly}">
 							<div class="control-group">
 								<label class="control-label">密码 :</label>
 								<div class="controls">
 									<form:input path="password" cssClass="span11" placeholder="密码" />
 								</div>
 							</div>
+							</c:if>
 							<div class="control-group">
 								<label class="control-label">邮箱 :</label>
 								<div class="controls">
