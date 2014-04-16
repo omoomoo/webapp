@@ -1,11 +1,18 @@
 package com.demo.webapp.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
+
+	@RequestMapping("/security/{path}")
+	public String process(@PathVariable("path") String path) {
+		return path;
+	}
 
 	@RequestMapping(value = "/login.html", method = RequestMethod.GET)
 	public String loginPage() {

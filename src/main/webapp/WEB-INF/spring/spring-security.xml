@@ -49,6 +49,9 @@
 				users-by-username-query="select username, password, enabled from security_user where username = ?"
 				authorities-by-username-query="select u.username as username, a.name as authority from security_user as u left join security_user_authorities as ua on u.id = ua.user_id left join security_authority as a on a.id = ua.authority_id where u.username = ?"
 				group-authorities-by-username-query="select g.id as id, g.name as group_name, a.name as authroity from security_group as g left join security_group_users as gu on g.id = gu.group_id left join security_user as u on gu.user_id = u.id left join security_group_authorities as ga on ga.group_id = g.id left join security_authority as a on ga.authority_id = a.id where u.username = ?" />
+			<password-encoder hash="md5">
+				<salt-source ref="saltRepository"/>
+			</password-encoder>
 		</authentication-provider>
 	</authentication-manager>
 

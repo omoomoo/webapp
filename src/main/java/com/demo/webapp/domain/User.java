@@ -38,6 +38,9 @@ public class User {
 	@Length(message = "密码长度必须为8-64位字符串！", min = 8, max = 64, groups = { UserAdd.class, UserUpdate.class,
 			UserPersonalUpdate.class, UserChangePassword.class, })
 	private String password;
+	@Column
+	@Length(message="盐长度必须为32位十六进制字符串！",min = 32, max = 32)
+	private String salt;
 	@Column(nullable = false)
 	@NotNull(groups = { UserAdd.class, UserUpdate.class })
 	private boolean enabled;

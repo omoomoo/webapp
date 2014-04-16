@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.webapp.domain.User;
@@ -15,8 +16,6 @@ import com.demo.webapp.service.exception.UsernameAlreadyExistsException;
 
 @Service
 public class UserService {
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private UserRepository userRepository;
 

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.demo.webapp.domain.Authority;
@@ -120,5 +121,12 @@ public class UserRepository {
 		jdbcTemplate.update("delete from security_user_authorities where user_id = ?", params);
 		jdbcTemplate.update("delete from security_group_users where user_id = ?", params);
 		jdbcTemplate.update("delete from security_user where id = ? ", params);
+	}
+
+	public Object getSalt(String username) {
+		String salt = jdbcTemplate.queryForObject("select salt from security_user where username = ? limit 1",
+				new Object[] { username }, String.class);
+
+		return salt;
 	}
 }
