@@ -46,6 +46,7 @@ public class FileUploadController {
 		redirectAttributes.addFlashAttribute("fileSize", file.getSize());
 
 		try {
+			// TODO 任意文件上传漏洞
 			FileUtils.writeByteArrayToFile(new File(basepath + file.getOriginalFilename()), file.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
