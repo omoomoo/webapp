@@ -1,13 +1,11 @@
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 								http://www.springframework.org/schema/beans/spring-beans.xsd
 								http://www.springframework.org/schema/security
 								http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<!-- 方法保护 -->
-	<global-method-security secured-annotations="enabled"
-		jsr250-annotations="disabled" pre-post-annotations="enabled" />
+	<global-method-security secured-annotations="enabled" jsr250-annotations="disabled" pre-post-annotations="enabled" />
 
 	<!-- 不需要Security保护的资源 -->
 	<http pattern="/resources/**" security="none" />
@@ -18,13 +16,10 @@
 		<intercept-url pattern="/login.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<!-- 登陆管理 -->
-		<form-login login-page="/login.html" login-processing-url="/login"
-			username-parameter="username" password-parameter="password"
-			default-target-url="/security/overview" always-use-default-target="true"
-			authentication-failure-url="/login.html?error" />
+		<form-login login-page="/login.html" login-processing-url="/login" username-parameter="username" password-parameter="password"
+			default-target-url="/security/overview" always-use-default-target="true" authentication-failure-url="/login.html?error" />
 		<!-- 登出管理 -->
-		<logout logout-url="/logout" logout-success-url="/login.html?logout"
-			delete-cookies="JSESSIONID" invalidate-session="true" />
+		<logout logout-url="/logout" logout-success-url="/login.html?logout" delete-cookies="JSESSIONID" invalidate-session="true" />
 		<!-- Header管理 -->
 		<headers>
 			<cache-control /> <!-- XSS -->
@@ -34,8 +29,7 @@
 		</headers>
 		<!-- Session策略 -->
 		<session-management session-fixation-protection="migrateSession">
-			<concurrency-control max-sessions="1"
-				error-if-maximum-exceeded="false" expired-url="/login.html" />
+			<concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/login.html" />
 		</session-management>
 		<!-- Token策略 -->
 		<csrf />
@@ -44,13 +38,12 @@
 	<!-- 认证管理 -->
 	<authentication-manager>
 		<authentication-provider>
-			<jdbc-user-service id="userDetailsService"
-				data-source-ref="dataSource"
+			<jdbc-user-service id="userDetailsService" data-source-ref="dataSource"
 				users-by-username-query="select username, password, enabled from security_user where username = ?"
 				authorities-by-username-query="select u.username as username, a.name as authority from security_user as u left join security_user_authorities as ua on u.id = ua.user_id left join security_authority as a on a.id = ua.authority_id where u.username = ?"
 				group-authorities-by-username-query="select g.id as id, g.name as group_name, a.name as authroity from security_group as g left join security_group_users as gu on g.id = gu.group_id left join security_user as u on gu.user_id = u.id left join security_group_authorities as ga on ga.group_id = g.id left join security_authority as a on ga.authority_id = a.id where u.username = ?" />
 			<password-encoder hash="md5">
-				<salt-source ref="saltRepository"/>
+				<salt-source ref="saltRepository" />
 			</password-encoder>
 		</authentication-provider>
 	</authentication-manager>

@@ -2,11 +2,11 @@ package com.demo.webapp.web.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(value = "/security")
 public class FileUploadController {
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
-	@Value(value = "basepath")
+	@Value(value = "fileupload.basepath")
 	private static String basepath;
-	@Value(value = "baseurl")
+	@Value(value = "fileupload.baseurl")
 	private static String pathurl;
 
 	@RequestMapping(value = "/file", method = RequestMethod.GET)
@@ -69,4 +69,14 @@ public class FileUploadController {
 		return null;
 	}
 
+	/**
+	 * 修复Java路径遍历漏洞BUG
+	 * 
+	 * @see http://hakipedia.com/index.php/Poison_Null_Byte
+	 * @param pathname
+	 * @return
+	 */
+	public boolean isPathValid(String pathname) {
+		return pathname.indexOf('\u0000') < 0 ? true : false;
+	}
 }

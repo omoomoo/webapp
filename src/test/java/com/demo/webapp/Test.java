@@ -1,5 +1,10 @@
 package com.demo.webapp;
 
-public class Test {
+import org.springframework.transaction.annotation.Transactional;
 
+public class Test {
+	@Transactional()
+	public void a() {
+
+	}
 }
