@@ -20,7 +20,7 @@ import com.demo.webapp.domain.mapper.GroupMapper;
 import com.demo.webapp.domain.mapper.UserMapper;
 
 @Repository
-public class UserRepository {
+public class UserRepository extends AbstractRepository {
 	private final static String QUERY_USERS_SQL = "select * from security_user";
 	private final static String QUERY_USER_BY_ID_SQL = "select * from security_user where id=?";
 	private final static String QUERY_GROUPS_BY_USERID = "select g.* from security_group as g left join security_group_users as gu on g.id = gu.group_id left join security_user as u on u.id = gu.user_id where u.id=?";
@@ -30,22 +30,30 @@ public class UserRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	public User getUser(long id) {
-		Object[] params = new Object[] { id };
-
-		List<User> users = jdbcTemplate.query(QUERY_USER_BY_ID_SQL, params, new UserMapper());
-		User user = null;
-		if (users.size() == 0) {
-			return null;
-		}
-		user = users.get(0);
-
-		List<Group> groups = jdbcTemplate.query(QUERY_GROUPS_BY_USERID, params, new GroupMapper());
-		List<Authority> authorities = jdbcTemplate.query(QUERY_AUTHORITIES_BY_USERID, params, new AuthorityMapper());
-
-		user.setGroups(groups);
-		user.setAuthorities(authorities);
-
+		User user = (User) this.getSession().get(User.class, id);
+		
 		return user;
+
+		// Object[] params = new Object[] { id };
+		//
+		// List<User> users = jdbcTemplate.query(QUERY_USER_BY_ID_SQL, params,
+		// new UserMapper());
+		// User user = null;
+		// if (users.size() == 0) {
+		// return null;
+		// }
+		// user = users.get(0);
+		//
+		// List<Group> groups = jdbcTemplate.query(QUERY_GROUPS_BY_USERID,
+		// params, new GroupMapper());
+		// List<Authority> authorities =
+		// jdbcTemplate.query(QUERY_AUTHORITIES_BY_USERID, params, new
+		// AuthorityMapper());
+		//
+		// user.setGroups(groups);
+		// user.setAuthorities(authorities);
+		//
+		// return user;
 	}
 
 	public User getUser(String username) {

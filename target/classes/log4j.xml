@@ -34,16 +34,10 @@
 		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.security">
-		<level value="debug" />
-	</logger>
-	<logger name="jdbc.sqltiming">
 		<level value="info" />
 	</logger>
 	<logger name="jdbc.resultsettable">
 		<level value="info" />
-	</logger>
-	<logger name="org.sitemesh">
-		<level value="debug" />
 	</logger>
 	<!-- 根日志 -->
 	<root>

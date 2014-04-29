@@ -7,14 +7,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.demo.webapp.domain.Authority;
-import com.demo.webapp.domain.mapper.AuthorityMapper;
 
 @Service
-public class AuthorityService {
+public class AuthorityService extends AbstractService {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	@SuppressWarnings("unchecked")
 	public List<Authority> getAuthorities() {
-		return jdbcTemplate.query("select * from security_authority", new AuthorityMapper());
+		return this.getSession().createCriteria(Authority.class).list();
 	}
+
 }

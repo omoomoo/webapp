@@ -20,7 +20,7 @@ import com.demo.webapp.domain.mapper.GroupMapper;
 import com.demo.webapp.domain.mapper.UserMapper;
 
 @Repository
-public class GroupRepository {
+public class GroupRepository extends AbstractRepository {
 	private static final String QUERY_GROUPS_SQL = "select * from security_group";
 	private static final String QUERY_GROUP_BY_ID_SQL = "select * from security_group where id = ?";
 	private static final String QUERY_USERS_BY_GROUPID = "select u.* from security_user as u left join security_group_users as gu on gu.user_id = u.id left join security_group as g on g.id = gu.group_id where g.id = ?";

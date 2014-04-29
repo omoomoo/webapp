@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,10 +24,13 @@ import com.demo.webapp.domain.validator.UserAdd;
 import com.demo.webapp.domain.validator.UserChangePassword;
 import com.demo.webapp.domain.validator.UserPersonalUpdate;
 import com.demo.webapp.domain.validator.UserUpdate;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "security_user")
 @XmlRootElement(name = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@UUID")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,9 +51,9 @@ public class User {
 	@Column
 	@Email(message = "邮箱格式不合法！", groups = { UserAdd.class, UserUpdate.class, UserPersonalUpdate.class, })
 	private String email;
-	@ManyToMany(mappedBy = "users", cascade = { CascadeType.REMOVE })
+	@ManyToMany(mappedBy = "users", cascade = { CascadeType.REMOVE }, fetch = FetchType.EAGER)
 	private List<Group> groups = new ArrayList<Group>();
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "security_user_authorities", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
 	private List<Authority> authorities = new ArrayList<Authority>();
 
